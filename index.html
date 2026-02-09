@@ -1,319 +1,454 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>你的店名 - 歡迎光臨</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0f0f0f;
-      color: #eee;
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Island Tea Shop</title>
+    <style>
+        /* --- CSS 變數定義 (根據你的 CMYK 轉換) --- */
+        :root {
+            /* CMYK 91, 88, 67, 64 -> 接近 #111621 (深海軍藍/黑) */
+            --primary-blue: #111621; 
+            /* CMYK 47, 65, 94, 6 -> 接近 #956424 (暗黃/古銅) */
+            --secondary-yellow: #956424;
+            /* 為了閱讀性，設定一個較亮的金色用於文字和發光特效 */
+            --text-gold: #cfaa68; 
+            --hover-glow: #ffeebb;
+        }
 
-    /* 導航列 */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s;
-    }
-    header.scrolled {
-      padding: 0.8rem 5%;
-      background: rgba(0,0,0,0.9);
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
+        }
 
-    .logo {
-      height: 60px;
-      cursor: pointer;
-    }
+        body {
+            background-color: var(--primary-blue);
+            color: var(--text-gold);
+            overflow-x: hidden;
+        }
 
-    nav {
-      display: flex;
-      gap: 4rem;
-    }
+        /* --- 導覽列 (Navbar) --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            background-color: rgba(17, 22, 33, 0.95); /* 半透明背景 */
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--secondary-yellow);
+        }
 
-    .nav-left, .nav-right {
-      display: flex;
-      gap: 2.5rem;
-    }
+        .nav-container {
+            width: 90%;
+            max-width: 1400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
 
-    .nav-item {
-      position: relative;
-      cursor: pointer;
-      font-size: 1.1rem;
-      padding: 0.6rem 0;
-      transition: all 0.3s;
-    }
+        /* Logo 設定 */
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            /* 這裡預設用文字代替圖片，你可以換成 <img src="..."> */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--text-gold);
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            z-index: 10;
+        }
 
-    .nav-item:hover {
-      color: #ffd700;                /* 金色 hover 文字 */
-      text-shadow: 0 0 15px #ffd700;
-    }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
 
-    .nav-item:hover::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 3px;
-      background: #ffd700;
-      box-shadow: 0 0 15px #ffd700;
-      transform: translateX(-50%);
-      transition: width 0.4s;
-      animation: glow 1.5s infinite alternate;
-    }
+        /* 選單佈局 */
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            width: 100%;
+        }
 
-    .nav-item:hover::after {
-      width: 80%;
-    }
+        /* 左右分開的邏輯 */
+        .nav-left {
+            justify-content: flex-start;
+            width: 45%;
+        }
+        .nav-right {
+            justify-content: flex-end;
+            width: 45%;
+        }
 
-    @keyframes glow {
-      from { box-shadow: 0 0 10px #ffd700; }
-      to   { box-shadow: 0 0 25px #ffd700, 0 0 40px #ffaa00; }
-    }
+        .nav-item {
+            position: relative;
+            cursor: pointer;
+            padding: 10px 0;
+        }
 
-    /* 下拉選單 */
-    .dropdown {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(20,20,20,0.95);
-      min-width: 220px;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s;
-      padding: 1rem 0;
-      z-index: 999;
-    }
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-gold);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
 
-    .nav-item:hover .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(8px);
-    }
+        /* --- Hover 特效 (發光) --- */
+        .nav-item:hover .nav-link {
+            color: var(--hover-glow);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
 
-    .dropdown a {
-      display: block;
-      padding: 0.9rem 1.8rem;
-      color: #ddd;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
+        /* --- Dropdown (下拉選單) --- */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-blue);
+            border: 1px solid var(--secondary-yellow);
+            min-width: 180px;
+            list-style: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
 
-    .dropdown a:hover {
-      background: rgba(255,215,0,0.15);
-      color: #ffd700;
-      padding-left: 2.2rem;
-    }
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            top: 130%; /* 稍微往下移一點 */
+        }
 
-    /* 主要內容 */
-    main {
-      padding-top: 120px;
-    }
+        .dropdown li {
+            padding: 10px 20px;
+            text-align: center;
+        }
 
-    .hero {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+        .dropdown li a {
+            text-decoration: none;
+            color: var(--text-gold);
+            display: block;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
 
-    .hero video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto;
-      height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      pointer-events: none;   /* 禁止點擊與暫停 */
-    }
+        .dropdown li:hover a {
+            color: var(--hover-glow);
+            background-color: rgba(149, 100, 36, 0.2);
+        }
 
-    .hero .logo-center {
-      position: relative;
-      z-index: 10;
-      max-width: 380px;
-      width: 70vw;
-      filter: drop-shadow(0 0 30px rgba(255,215,0,0.6));
-      transition: transform 0.6s;
-    }
+        /* --- Hero Video Section --- */
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 0; /* 影片置頂，但在 navbar 下 */
+        }
 
-    .hero .logo-center:hover {
-      transform: scale(1.08);
-    }
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            opacity: 0.6; /* 讓影片稍微暗一點，凸顯文字 */
+        }
 
-    /* 產品區 */
-    .products {
-      padding: 6rem 5%;
-      text-align: center;
-    }
+        .hero-content {
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
 
-    .products h2 {
-      font-size: 2.8rem;
-      margin-bottom: 3rem;
-      color: #ffd700;
-      text-shadow: 0 0 20px rgba(255,215,0,0.4);
-    }
+        /* --- 招牌產品介紹區 --- */
+        .signature-section {
+            padding: 100px 10%;
+            background-color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            border: 2px solid var(--secondary-yellow);
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
+        }
 
-    .product-item {
-      border-radius: 16px;
-      overflow: hidden;
-      background: #1a1a1a;
-      transition: all 0.4s;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+        .product-image img {
+            width: 100%;
+            display: block;
+        }
 
-    .product-item:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 25px 50px rgba(255,215,0,0.2);
-    }
+        .product-text {
+            flex: 1;
+            min-width: 300px;
+        }
 
-    .product-item img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
+        .product-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--hover-glow);
+            border-bottom: 1px solid var(--secondary-yellow);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
 
-    .product-item:hover img {
-      transform: scale(1.12);
-    }
+        .product-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
-    .product-item p {
-      padding: 1.2rem;
-      font-size: 1.2rem;
-      color: #ccc;
-    }
+        /* --- 手機版選單切換按鈕 (Hamburger) --- */
+        .menu-toggle {
+            display: none;
+            font-size: 2rem;
+            color: var(--text-gold);
+            cursor: pointer;
+            z-index: 1001;
+            position: absolute;
+            right: 20px;
+        }
 
-    @media (max-width: 900px) {
-      nav {
-        gap: 2rem;
-      }
-      .nav-left, .nav-right {
-        gap: 1.2rem;
-      }
-      .nav-item {
-        font-size: 1rem;
-      }
-      .logo {
-        height: 50px;
-      }
-      .hero video {
-        object-position: center;
-      }
-    }
-  </style>
+        /* --- 響應式設計 (Mobile) --- */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-container {
+                justify-content: center; /* Logo 置中 */
+            }
+
+            .logo-container {
+                position: relative;
+                left: 0;
+                transform: none;
+                margin: 0 auto;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; /* 預設隱藏 */
+                width: 70%;
+                height: 100vh;
+                background-color: var(--primary-blue);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease;
+                z-index: 999;
+                border-left: 1px solid var(--secondary-yellow);
+                padding-top: 60px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            /* 手機版合併左右選單 */
+            .nav-left, .nav-right {
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+            }
+            
+            /* 手機版下拉選單改為直接顯示 */
+            .dropdown {
+                position: static;
+                transform: none;
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                display: none; /* 點擊才顯示，這裡簡化為 hover 顯示 */
+                opacity: 1;
+                visibility: visible;
+                padding-left: 0;
+            }
+
+            .nav-item:hover .dropdown {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <img src="logo.png" alt="店LOGO" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <header>
+        <div class="nav-container">
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-    <nav>
-      <div class="nav-left">
-        <div class="nav-item">選項一
-          <div class="dropdown">
-            <a href="#">子選項 1-1</a>
-            <a href="#">子選項 1-2</a>
-            <a href="#">子選項 1-3</a>
-            <a href="#">子選項 1-4</a>
-            <a href="#">子選項 1-5</a>
-            <a href="#">子選項 1-6</a>
-            <a href="#">子選項 1-7</a>
-            <a href="#">子選項 1-8</a>
-            <a href="#">子選項 1-9</a>
-            <a href="#">子選項 1-10</a>
-          </div>
-        </div>
-        <div class="nav-item">選項二
-          <div class="dropdown"> ... 同上 10 個子選項 ...</div>
-        </div>
-        <div class="nav-item">選項三
-          <div class="dropdown"> ... 同上 10 個子選項 ...</div>
-        </div>
-      </div>
+            <ul class="nav-links nav-left" id="nav-menu-mobile">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-key="about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-key="product">Product</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-key="whatsnew">What’s New</a></li>
+                        <li><a href="#" data-key="menu">Menu</a></li>
+                        <li><a href="#" data-key="catering">Catering Service</a></li>
+                    </ul>
+                </li>
+            </ul>
 
-      <div class="nav-right">
-        <div class="nav-item">選項四
-          <div class="dropdown"> ... 同上 10 個子選項 ...</div>
-        </div>
-        <div class="nav-item">選項五
-          <div class="dropdown"> ... 同上 10 個子選項 ...</div>
-        </div>
-        <div class="nav-item">選項六
-          <div class="dropdown"> ... 同上 10 個子選項 ...</div>
-        </div>
-      </div>
-    </nav>
-  </header>
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/100x100/111621/cfaa68?text=LOGO" alt="Logo" class="logo-img">
+            </div>
 
-  <main>
-    <section class="hero">
-      <!-- 這裡換成你自己的影片網址（建議 YouTube 或 Vimeo） -->
-      <video autoplay muted loop playsinline>
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-girl-drinking-bubble-tea-1234-large.mp4" type="video/mp4">
-        你的瀏覽器不支援影片
-      </video>
+            <ul class="nav-links nav-right" id="nav-menu-mobile-right">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-key="store">Store Location</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Alhambra</a></li>
+                        <li><a href="#">Temple City</a></li>
+                        <li><a href="#">San Jose</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-key="join">Join Us</a>
+                    <ul class="dropdown">
+                        <li><a href="#" data-key="job">Job Opportunity</a></li>
+                        <li><a href="#" data-key="franchise">Franchise</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-key="language">Language</a>
+                    <ul class="dropdown">
+                        <li><a href="#" onclick="setLanguage('en')">English</a></li>
+                        <li><a href="#" onclick="setLanguage('zh')">Chinese (中文)</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
 
-      <img src="logo.png" alt="中央大LOGO" class="logo-center" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <section class="hero-section">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="https://videos.pexels.com/video-files/5091624/5091624-hd_1920_1080_24fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <h1 class="hero-title" style="color: white; font-weight: 200; letter-spacing: 5px;">EST. 2024</h1>
+        </div>
     </section>
 
-    <section class="products">
-      <h2>我們的招牌產品</h2>
-      <div class="product-grid">
-        <div class="product-item">
-          <img src="https://via.placeholder.com/600x800/111/eee?text=產品1" alt="產品1">
-          <p>翡翠檸檬鮮奶茶</p>
+    <section class="signature-section">
+        <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Signature Drink">
         </div>
-        <div class="product-item">
-          <img src="https://via.placeholder.com/600x800/222/eee?text=產品2" alt="產品2">
-          <p>伯牙絕弦 頂級烏龍</p>
+        <div class="product-text">
+            <h2 data-key="signature_title">Signature Blue Milk Tea</h2>
+            <p data-key="signature_desc">
+                Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. 
+                Our signature drink captures the essence of the ocean with its unique hue and refreshing taste.
+            </p>
         </div>
-        <!-- 再放 6~10 個同樣格式的產品 -->
-        <div class="product-item"><img src="https://via.placeholder.com/600x800/333/eee?text=產品3" alt=""><p>產品3</p></div>
-        <div class="product-item"><img src="https://via.placeholder.com/600x800/444/eee?text=產品4" alt=""><p>產品4</p></div>
-        <!-- ... 可以繼續加 -->
-      </div>
     </section>
-  </main>
 
-  <script>
-    // 導航列捲動變小效果（可選）
-    window.addEventListener('scroll', () => {
-      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 100);
-    });
-  </script>
+    <script>
+        // --- 翻譯字典 ---
+        const translations = {
+            en: {
+                about: "About Us",
+                product: "Product",
+                whatsnew: "What’s New",
+                menu: "Menu",
+                catering: "Catering Service",
+                store: "Store Location",
+                join: "Join Us",
+                job: "Job Opportunity",
+                franchise: "Franchise",
+                language: "Language",
+                signature_title: "Signature Blue Milk Tea",
+                signature_desc: "Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. Our signature drink captures the essence of the ocean with its unique hue and refreshing taste."
+            },
+            zh: {
+                about: "關於島嶼",
+                product: "關於產品",
+                whatsnew: "新品介紹",
+                menu: "飲品菜單",
+                catering: "飲品服務",
+                store: "門市位置",
+                join: "加入我們",
+                job: "工作機會",
+                franchise: "加盟",
+                language: "語言",
+                signature_title: "招牌藍海鮮奶茶",
+                signature_desc: "體驗我們獨家茶葉調配的深度，與新鮮有機牛奶完美平衡。我們的招牌飲品以其獨特的色調和清爽的口感捕捉了海洋的精髓。"
+            }
+        };
+
+        // --- 切換語言函數 ---
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-key]');
+            
+            elements.forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+        }
+
+        // --- 手機版選單開關 ---
+        function toggleMenu() {
+            const leftNav = document.querySelector('.nav-left');
+            const rightNav = document.querySelector('.nav-right');
+            
+            // 因為電腦版分左右，手機版我們把這兩個 class 都設為 active
+            leftNav.classList.toggle('active');
+            rightNav.classList.toggle('active');
+        }
+        
+        // 修正手機版選單：當點擊時，將左右兩個 UL 疊在一起顯示
+        const menuToggle = document.querySelector('.menu-toggle');
+        menuToggle.addEventListener('click', () => {
+             // 這裡的邏輯已在 toggleMenu 處理
+        });
+
+    </script>
 </body>
 </html>
