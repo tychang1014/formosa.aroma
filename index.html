@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Island Tea Shop</title>
+    <title>Formosa Aroma - Premium Handcrafted Tea</title>
     <style>
-        /* --- CSS 變數定義 (根據你的 CMYK 轉換) --- */
+        /* --- CSS 變數定義 --- */
         :root {
-            /* CMYK 91, 88, 67, 64 -> 接近 #111621 (深海軍藍/黑) */
             --primary-blue: #111621; 
-            /* CMYK 47, 65, 94, 6 -> 接近 #956424 (暗黃/古銅) */
             --secondary-yellow: #956424;
-            /* 為了閱讀性，設定一個較亮的金色用於文字和發光特效 */
             --text-gold: #cfaa68; 
             --hover-glow: #ffeebb;
         }
@@ -35,7 +32,7 @@
             top: 0;
             width: 100%;
             height: 90px;
-            background-color: rgba(17, 22, 33, 0.95); /* 半透明背景 */
+            background-color: rgba(17, 22, 33, 0.95);
             backdrop-filter: blur(5px);
             z-index: 1000;
             display: flex;
@@ -47,27 +44,36 @@
         .nav-container {
             width: 90%;
             max-width: 1400px;
+            height: 100%;
+            display: flex;
+            justify-content: center; /* 讓 Logo 預設居中 */
+            align-items: center;
+            position: relative;
+        }
+
+        /* 新增：選單容器 (用來解決手機版重疊問題) */
+        .nav-content-wrapper {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
         }
 
         /* Logo 設定 */
         .logo-container {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 10%;
+            top: 50%;
+            transform: translate(-50%, -50%); /* 確保絕對居中 */
             width: 80px;
             height: 80px;
-            /* 這裡預設用文字代替圖片，你可以換成 <img src="..."> */
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid var(--text-gold);
             border-radius: 50%;
             background-color: var(--primary-blue);
-            z-index: 10;
+            z-index: 20; /* Logo 層級高於選單文字 */
         }
 
         .logo-img {
@@ -82,17 +88,14 @@
             display: flex;
             gap: 40px;
             list-style: none;
-            width: 100%;
+            flex: 1; /* 讓左右兩邊佔據剩餘空間 */
         }
 
-        /* 左右分開的邏輯 */
-        .nav-left {
-            justify-content: flex-start;
-            width: 45%;
-        }
+        /* 左右分佈 */
+
         .nav-right {
+            width: 100%;
             justify-content: flex-end;
-            width: 45%;
         }
 
         .nav-item {
@@ -111,7 +114,6 @@
             text-transform: uppercase;
         }
 
-        /* --- Hover 特效 (發光) --- */
         .nav-item:hover .nav-link {
             color: var(--hover-glow);
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
@@ -132,12 +134,13 @@
             transition: all 0.3s ease;
             padding: 10px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            z-index: 100;
         }
 
         .nav-item:hover .dropdown {
             opacity: 1;
             visibility: visible;
-            top: 130%; /* 稍微往下移一點 */
+            top: 130%;
         }
 
         .dropdown li {
@@ -158,7 +161,89 @@
             background-color: rgba(149, 100, 36, 0.2);
         }
 
-        /* --- Hero Video Section --- */
+        /* --- 手機版選單切換按鈕 --- */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--text-gold);
+            cursor: pointer;
+            z-index: 1001; /* 按鈕要在最上層 */
+            position: absolute;
+            right: 0;
+        }
+
+        /* --- 響應式設計 (Mobile Fix) --- */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .logo-container {
+                /* 手機版 Logo 稍微調整 */
+                width: 60px;
+                height: 60px;
+            }
+
+            /* 修正核心：將 nav-content-wrapper 變為滑動抽屜 */
+            .nav-content-wrapper {
+                position: fixed;
+                top: 0;
+                right: -100%; /* 預設隱藏在右側 */
+                width: 70%;
+                height: 100vh;
+                background-color: var(--primary-blue);
+                flex-direction: column; /* 垂直排列 */
+                justify-content: flex-start; /* 從上面開始排 */
+                padding-top: 80px; /* 避開頂部空間 */
+                transition: 0.4s ease;
+                z-index: 999;
+                border-left: 1px solid var(--secondary-yellow);
+                overflow-y: auto; /* 如果內容太多可以捲動 */
+            }
+
+            .nav-content-wrapper.active {
+                right: 0; /* 滑入 */
+            }
+
+            /* 取消原本左右分開的邏輯，變為垂直堆疊 */
+            .nav-right {
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                gap: 20px;
+                padding: 10px 0;
+            }
+
+            /* 手機版下拉選單改為直接顯示，方便點擊 */
+            .dropdown {
+                position: static;
+                transform: none;
+                border: none;
+                background: transparent;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                display: none; /* 預設收合，節省空間 */
+                padding: 10px 0;
+            }
+            
+            /* 在手機上，讓子選單有些縮排或區隔 */
+            .dropdown li {
+                padding: 5px 0;
+            }
+            .dropdown li a {
+                color: #aaa; /* 稍微暗一點以示區別 */
+            }
+
+            /* 手機上 hover 即顯示 (或是你可以改為點擊顯示) */
+            .nav-item:hover .dropdown {
+                display: block;
+            }
+        }
+
+        /* --- Hero Section --- */
         .hero-section {
             height: 100vh;
             width: 100%;
@@ -167,7 +252,6 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            margin-top: 0; /* 影片置頂，但在 navbar 下 */
         }
 
         .hero-video {
@@ -180,7 +264,7 @@
             width: auto;
             height: auto;
             z-index: -1;
-            opacity: 0.6; /* 讓影片稍微暗一點，凸顯文字 */
+            opacity: 0.6;
         }
 
         .hero-content {
@@ -192,9 +276,10 @@
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            color: white;
         }
 
-        /* --- 招牌產品介紹區 --- */
+        /* --- Signature Section --- */
         .signature-section {
             padding: 100px 10%;
             background-color: var(--primary-blue);
@@ -238,140 +323,64 @@
             line-height: 1.8;
             margin-bottom: 20px;
         }
-
-        /* --- 手機版選單切換按鈕 (Hamburger) --- */
-        .menu-toggle {
-            display: none;
-            font-size: 2rem;
-            color: var(--text-gold);
-            cursor: pointer;
-            z-index: 1001;
-            position: absolute;
-            right: 20px;
-        }
-
-        /* --- 響應式設計 (Mobile) --- */
-        @media (max-width: 900px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-container {
-                justify-content: center; /* Logo 置中 */
-            }
-
-            .logo-container {
-                position: relative;
-                left: 0;
-                transform: none;
-                margin: 0 auto;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%; /* 預設隱藏 */
-                width: 70%;
-                height: 100vh;
-                background-color: var(--primary-blue);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s ease;
-                z-index: 999;
-                border-left: 1px solid var(--secondary-yellow);
-                padding-top: 60px;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            /* 手機版合併左右選單 */
-            .nav-left, .nav-right {
-                width: 100%;
-                flex-direction: column;
-                justify-content: center;
-                gap: 30px;
-            }
-            
-            /* 手機版下拉選單改為直接顯示 */
-            .dropdown {
-                position: static;
-                transform: none;
-                border: none;
-                background: transparent;
-                box-shadow: none;
-                display: none; /* 點擊才顯示，這裡簡化為 hover 顯示 */
-                opacity: 1;
-                visibility: visible;
-                padding-left: 0;
-            }
-
-            .nav-item:hover .dropdown {
-                display: block;
-            }
-        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="nav-container">
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-            <ul class="nav-links nav-left" id="nav-menu-mobile">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="about">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="product">Product</a>
-                    <ul class="dropdown">
-                        <li><a href="#" data-key="whatsnew">What’s New</a></li>
-                        <li><a href="#" data-key="menu">Menu</a></li>
-                        <li><a href="#" data-key="catering">Catering Service</a></li>
-                    </ul>
-                </li>
-            </ul>
-
             <div class="logo-container">
                 <img src="https://via.placeholder.com/100x100/111621/cfaa68?text=LOGO" alt="Logo" class="logo-img">
             </div>
 
-            <ul class="nav-links nav-right" id="nav-menu-mobile-right">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="store">Store Location</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Alhambra</a></li>
-                        <li><a href="#">Temple City</a></li>
-                        <li><a href="#">San Jose</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="join">Join Us</a>
-                    <ul class="dropdown">
-                        <li><a href="#" data-key="job">Job Opportunity</a></li>
-                        <li><a href="#" data-key="franchise">Franchise</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-key="language">Language</a>
-                    <ul class="dropdown">
-                        <li><a href="#" onclick="setLanguage('en')">English</a></li>
-                        <li><a href="#" onclick="setLanguage('zh')">Chinese (中文)</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+            <div class="nav-content-wrapper" id="mobile-menu-drawer">
+              
+                <ul class="nav-links nav-right">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="product">Product</a>
+                        <ul class="dropdown">
+                            <li><a href="#" data-key="whatsnew">What’s New</a></li>
+                            <li><a href="#" data-key="menu">Menu</a></li>
+                            <li><a href="#" data-key="catering">Catering Service</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="store">Store Location</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Alhambra</a></li>
+                            <li><a href="#">Temple City</a></li>
+                            <li><a href="#">San Jose</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="join">Join Us</a>
+                        <ul class="dropdown">
+                            <li><a href="#" data-key="job">Job Opportunity</a></li>
+                            <li><a href="#" data-key="franchise">Franchise</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-key="language">Language</a>
+                        <ul class="dropdown">
+                            <li><a href="#" onclick="setLanguage('en')">English</a></li>
+                            <li><a href="#" onclick="setLanguage('zh')">Chinese (中文)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> </div>
     </header>
 
     <section class="hero-section">
         <video autoplay muted loop playsinline class="hero-video">
             <source src="https://videos.pexels.com/video-files/5091624/5091624-hd_1920_1080_24fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
         <div class="hero-content">
-            <h1 class="hero-title" style="color: white; font-weight: 200; letter-spacing: 5px;">EST. 2024</h1>
+            <h1 class="hero-title" style="font-weight: 200; letter-spacing: 5px;">EST. 2024</h1>
         </div>
     </section>
 
@@ -389,7 +398,6 @@
     </section>
 
     <script>
-        // --- 翻譯字典 ---
         const translations = {
             en: {
                 about: "About Us",
@@ -421,10 +429,8 @@
             }
         };
 
-        // --- 切換語言函數 ---
         function setLanguage(lang) {
             const elements = document.querySelectorAll('[data-key]');
-            
             elements.forEach(el => {
                 const key = el.getAttribute('data-key');
                 if (translations[lang][key]) {
@@ -433,22 +439,11 @@
             });
         }
 
-        // --- 手機版選單開關 ---
+        // 修改後的開關邏輯：只控制 Wrapper
         function toggleMenu() {
-            const leftNav = document.querySelector('.nav-left');
-            const rightNav = document.querySelector('.nav-right');
-            
-            // 因為電腦版分左右，手機版我們把這兩個 class 都設為 active
-            leftNav.classList.toggle('active');
-            rightNav.classList.toggle('active');
+            const drawer = document.getElementById('mobile-menu-drawer');
+            drawer.classList.toggle('active');
         }
-        
-        // 修正手機版選單：當點擊時，將左右兩個 UL 疊在一起顯示
-        const menuToggle = document.querySelector('.menu-toggle');
-        menuToggle.addEventListener('click', () => {
-             // 這裡的邏輯已在 toggleMenu 處理
-        });
-
     </script>
 </body>
 </html>
