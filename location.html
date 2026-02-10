@@ -241,45 +241,7 @@
                 display: block;
             }
         }
-
-        /* --- Hero Section --- */
-        .hero-section {
-            height: 100vh;
-            width: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        .hero-content {
-            z-index: 1;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(0,0,0,0.8);
-            color: white;
-        }
-
-        /* --- Signature Section --- */
-        .signature-section {
+        .location-section {
             padding: 100px 10%;
             background-color: var(--primary-blue);
             display: flex;
@@ -287,40 +249,6 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 50px;
-        }
-
-        .product-image {
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            border: 2px solid var(--secondary-yellow);
-            padding: 10px;
-            box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
-        }
-
-        .product-image img {
-            width: 100%;
-            display: block;
-        }
-
-        .product-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .product-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--hover-glow);
-            border-bottom: 1px solid var(--secondary-yellow);
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .product-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -339,7 +267,7 @@
                 <ul class="nav-links nav-right">
                     <li class="nav-item">
                         <a href="index.html" class="nav-link" data-key="main">Main</a>
-                    </li>                    
+                    </li> 
                     <li class="nav-item">
                         <a href="about.html" class="nav-link" data-key="about">About Us</a>
                     </li>
@@ -354,9 +282,9 @@
                     <li class="nav-item">
                         <a href="location.html" class="nav-link" data-key="store">Store Location</a>
                         <ul class="dropdown">
-                            <li><a href="location.html">Alhambra</a></li>
-                            <li><a href="location.html">Temple City</a></li>
-                            <li><a href="location.html">San Jose</a></li>
+                            <li><a href="#Alhambra Store">Alhambra</a></li>
+                            <li><a href="#Temple City Store">Temple City</a></li>
+                            <li><a href="#San Jose Store">San Jose</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -377,50 +305,28 @@
             </div> </div>
     </header>
 
-    <section class="hero-section">
-        <video autoplay muted loop playsinline class="hero-video">
-            <source src="https://videos.pexels.com/video-files/5091624/5091624-hd_1920_1080_24fps.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
-            <h1 class="hero-title" style="font-weight: 200; letter-spacing: 5px;">EST. 2023</h1>
-            <h1 class="hero-title" style="font-weight: 200; letter-spacing: 5px;">Los Angeles</h1>
-        </div>
+    <section id="store" class="location-section">
+        <h1>Store Locations</h1>
+        <p>我們的門市位置：</p>
+        <ul>
+        <li><strong>Alhambra</strong> - 地址：xxx xxx xxx</li>
+        <li><strong>Temple City</strong> - 地址：yyy yyy yyy</li>
+        <li><strong>San Jose</strong> - 地址：zzz zzz zzz</li>
+        </ul>
+        <!-- 可以嵌入 Google Maps iframe -->
     </section>
-
-    <section class="signature-section">
-        <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Signature Drink">
-        </div>
-        <div class="product-text">
-            <h2 data-key="signature_title">Signature Blue Milk Tea</h2>
-            <p data-key="signature_desc">
-                Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. 
-                Our signature drink captures the essence of the ocean with its unique hue and refreshing taste.
-            </p>
-        </div>
+    
+    <section id="Alhambra Store" class="page">
+        <h2>Alhambra Store</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.120231485619!2d-118.13512028844465!3d34.09206027302995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c56dd047aa53%3A0x153ba96d74cae2cb!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBBbGhhbWJyYSwgQ0E!5e0!3m2!1sen!2sus!4v1770690378653!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
     </section>
-
-   <section id="product" class="page">
-        <h1>Our Products</h1>
-        <p>這裡放產品列表、分類、圖片展示等。</p>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem; margin-top:2rem;">
-        <!-- 範例產品卡片 -->
-        <div style="background:#fff; padding:1rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-            <img src="https://via.placeholder.com/300x200?text=Product+1" alt="產品1" style="width:100%; border-radius:6px;">
-            <h3>產品名稱 A</h3>
-            <p>簡短描述...</p>
-        </div>
-        <!-- 更多產品... -->
-        </div>
+    <section id="Temple City Store" class="page"></section>
+        <h2>Temple City Store</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.7679819485593!2d-118.07566188844434!3d34.101083773026524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2db6ba01a5be9%3A0xc5afc6cc71c2060e!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBUZW1wbGUgQ2l0eSwgQ0E!5e0!3m2!1sen!2sus!4v1770689617968!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
     </section>
-
-    <section id="join" class="page">
-        <h1>Join Us</h1>
-        <p>歡迎加入我們的團隊！</p>
-        <h2>職缺機會</h2>
-        <p>目前開放職位...</p>
-        <h2>加盟資訊</h2>
-        <p>加盟條件與流程...</p>
+    <section id="" class="page"></section>
+        <h2>San Jose Store</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3174.0985596357928!2d-121.99453228831179!3d37.292797871994495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcb814e18c82f%3A0x3256eca7b766ce9c!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBTYW4gSm9zZSwgQ0E!5e0!3m2!1sen!2sus!4v1770689656590!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
     </section>
 
     <script>
