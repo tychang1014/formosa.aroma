@@ -20,6 +20,10 @@
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
         }
 
+        html {
+            scroll-padding-top: 80px;
+        }
+
         body {
             background-color: var(--primary-blue);
             color: var(--text-gold);
@@ -171,6 +175,43 @@
             position: absolute;
             right: 0;
         }
+        .signature-section {
+            padding: 120px 10%;
+            background-color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .product-image img {
+            width:100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 10px;
+        }
+        .product-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .product-text h2 {
+            font-size: 2.5rem;
+            color: var(--hover-glow);
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .product-text p {
+            text-indent: 50px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: justify;
+            padding-bottom: 10px;
+        }
 
         /* --- 響應式設計 (Mobile Fix) --- */
         @media (max-width: 900px) {
@@ -240,6 +281,8 @@
             .nav-item:hover .dropdown {
                 display: block;
             }
+            
+            
         }
     </style>
 </head>
@@ -273,9 +316,9 @@
                     <li class="nav-item">
                         <a href="location.html" class="nav-link" data-key="store">Store Location</a>
                         <ul class="dropdown">
-                            <li><a href="location.html">Alhambra</a></li>
-                            <li><a href="location.html">Temple City</a></li>
-                            <li><a href="location.html">San Jose</a></li>
+                            <li><a href="#Alhambra Store">Alhambra</a></li>
+                            <li><a href="#Temple City Store">Temple City</a></li>
+                            <li><a href="#San Jose Store">San Jose</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -296,17 +339,21 @@
             </div> </div>
     </header>
 
-        <section id="about" class="page">
-        <h1>Our Products</h1>
-        <p>這裡放產品列表、分類、圖片展示等。</p>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem; margin-top:2rem;">
-        <!-- 範例產品卡片 -->
-        <div style="background:#fff; padding:1rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-            <img src="https://via.placeholder.com/300x200?text=Product+1" alt="產品1" style="width:100%; border-radius:6px;">
-            <h3>關於我們</h3>
-            <p>簡短描述...</p>
+    <section class="signature-section">
+        <div class="product-text">
+            <h2 data-key="signature_title">About Formosa Aroma</h2>
         </div>
-        <!-- 更多產品... -->
+        <div class="product-image">
+            <img src="https://github.com/tychang1014/formosa.aroma/blob/main/Signatures.jpg?raw=true" alt="Signature Drink">
+        </div>
+        <div class="product-text">
+            <p data-key="signature_desc">
+                <b style="font-size: 1.6rem; ">Formosa Aroma</b>
+                is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture. 
+            </p>
+            <p data-key="signature_desc2">                
+                With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we continue to strive for excellence in every cup we serve.
+            </p>
         </div>
     </section>
 
@@ -324,8 +371,9 @@
                 job: "Job Opportunity",
                 franchise: "Franchise",
                 language: "Language",
-                signature_title: "Signature Blue Milk Tea",
-                signature_desc: "Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. Our signature drink captures the essence of the ocean with its unique hue and refreshing taste."
+                signature_title: "About Formosa Aroma",
+                signature_desc: "is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture.",
+                signature_desc2: "With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we invite you to craft your own flavor journey, where tradition meets creativity in every sip."
             },
             zh: {
                 main: "首頁",
@@ -339,8 +387,9 @@
                 job: "工作機會",
                 franchise: "加盟",
                 language: "語言",
-                signature_title: "招牌藍海鮮奶茶",
-                signature_desc: "體驗我們獨家茶葉調配的深度，與新鮮有機牛奶完美平衡。我們的招牌飲品以其獨特的色調和清爽的口感捕捉了海洋的精髓。"
+                signature_title: "關於島嶼茶鄉",
+                signature_desc: "Formosa Aroma 致力於傳承與呈現正宗台灣茶香。堅持以嚴選高品質茶葉，融合傳統工藝與創新技術，確保每一杯茶都展現台灣茶深厚的底蘊、純淨風味與卓越品質。",
+                signature_desc2: "我們提供超過 20 種可客製化配料選擇，為顧客打造獨一無二的個人化品茶體驗。憑藉對品質與創新的堅持，Formosa Aroma 在市場中持續建立良好的口碑。我們誠摯的邀請您來打造屬於您的專屬風味，讓每一口都能喝到台灣的細緻與創新。"
             }
         };
 

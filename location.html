@@ -20,6 +20,10 @@
             font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
         }
 
+        html {
+            scroll-padding-top: 80px;
+        }
+
         body {
             background-color: var(--primary-blue);
             color: var(--text-gold);
@@ -171,6 +175,52 @@
             position: absolute;
             right: 0;
         }
+        
+        .location-section {
+            padding: 120px 10%;
+            background-color: var(--primary-blue);
+            align-items: center;
+            text-align: center;
+            flex-wrap: wrap;
+            padding-bottom: 5px;
+        }
+
+        .address-section {
+            padding-top: 30px;
+            padding-left: 10%;
+            padding-right: 10%;
+            background-color: var(--primary-blue);
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .location-text h2 {
+            font-size: 2.5rem;
+            color: var(--hover-glow);
+            display: inline-block;
+        }
+
+        .location-text p1 {
+            font-size: 1.8rem;
+            line-height: 1.2;
+            font-weight: bold;
+            text-align: left; 
+        }
+
+        .location-text p2 {
+            font-size: 1.3rem;
+            line-height: 2.5;
+            font-style: italic;
+            text-align: left;            
+        }
+        .location-box {
+            flex: 1;
+            height: 450px;
+            border: 2px solid var(--secondary-yellow);
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
+        }
 
         /* --- 響應式設計 (Mobile Fix) --- */
         @media (max-width: 900px) {
@@ -241,15 +291,7 @@
                 display: block;
             }
         }
-        .location-section {
-            padding: 100px 10%;
-            background-color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 50px;
-        }
+        
     </style>
 </head>
 <body>
@@ -305,28 +347,40 @@
             </div> </div>
     </header>
 
-    <section id="store" class="location-section">
-        <h1>Store Locations</h1>
-        <p>我們的門市位置：</p>
-        <ul>
-        <li><strong>Alhambra</strong> - 地址：xxx xxx xxx</li>
-        <li><strong>Temple City</strong> - 地址：yyy yyy yyy</li>
-        <li><strong>San Jose</strong> - 地址：zzz zzz zzz</li>
-        </ul>
-        <!-- 可以嵌入 Google Maps iframe -->
+    <section class="location-section">
+        <div class="location-text">
+            <h2 data-key="location_title">Store Location</h2>
+        </div>        
     </section>
     
-    <section id="Alhambra Store" class="page">
-        <h2>Alhambra Store</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.120231485619!2d-118.13512028844465!3d34.09206027302995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c56dd047aa53%3A0x153ba96d74cae2cb!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBBbGhhbWJyYSwgQ0E!5e0!3m2!1sen!2sus!4v1770690378653!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
+    <section id="Alhambra Store" class="address-section">
+        <div class="location-text">
+            <p1>Alhambra Store <br> </p1>
+            <p2 data-key="address"> Address: </p2> <p2> 560 W Main St, Alhambra, CA 91801 </p2>
+        </div>
+        <div class="location-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.120231485619!2d-118.13512028844465!3d34.09206027302995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c56dd047aa53%3A0x153ba96d74cae2cb!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBBbGhhbWJyYSwgQ0E!5e0!3m2!1sen!2sus!4v1770690378653!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </section>
-    <section id="Temple City Store" class="page"></section>
-        <h2>Temple City Store</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.7679819485593!2d-118.07566188844434!3d34.101083773026524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2db6ba01a5be9%3A0xc5afc6cc71c2060e!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBUZW1wbGUgQ2l0eSwgQ0E!5e0!3m2!1sen!2sus!4v1770689617968!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
+
+    <section id="Temple City Store" class="address-section">
+        <div class="location-text">
+            <p1>Temple City Store <br> </p1>
+            <p2 data-key="address"> Address: </p2> <p2>5570 Rosemead Blvd Suite 130, Temple City, CA 91780 </p2>
+        </div>
+        <div class="location-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.7679819485593!2d-118.07566188844434!3d34.101083773026524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2db6ba01a5be9%3A0xc5afc6cc71c2060e!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBUZW1wbGUgQ2l0eSwgQ0E!5e0!3m2!1sen!2sus!4v1770689617968!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </section>
-    <section id="" class="page"></section>
-        <h2>San Jose Store</h2>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3174.0985596357928!2d-121.99453228831179!3d37.292797871994495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcb814e18c82f%3A0x3256eca7b766ce9c!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBTYW4gSm9zZSwgQ0E!5e0!3m2!1sen!2sus!4v1770689656590!5m2!1sen!2sus" width="100%" height="450" style="border:0; margin-top:2rem;" allowfullscreen="" loading="lazy"></iframe>
+
+    <section id="San Jose Store" class="address-section">
+        <div class="location-text">
+            <p1>San Jose Store <br> </p1>
+            <p2 data-key="address"> Address: </p2> <p2>5205 Prospect Rd #135, San Jose, CA 95129 </p2>
+        </div>
+        <div class="location-box">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3174.0985596357928!2d-121.99453228831179!3d37.292797871994495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcb814e18c82f%3A0x3256eca7b766ce9c!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBTYW4gSm9zZSwgQ0E!5e0!3m2!1sen!2sus!4v1770689656590!5m2!1sen!2sus" width="100%" height="425" style="border:0; " allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </section>
 
     <script>
@@ -343,8 +397,8 @@
                 job: "Job Opportunity",
                 franchise: "Franchise",
                 language: "Language",
-                signature_title: "Signature Blue Milk Tea",
-                signature_desc: "Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. Our signature drink captures the essence of the ocean with its unique hue and refreshing taste."
+                location_title: "Store Location",
+                address: "Address: ",
             },
             zh: {
                 main: "首頁",
@@ -358,8 +412,8 @@
                 job: "工作機會",
                 franchise: "加盟",
                 language: "語言",
-                signature_title: "招牌藍海鮮奶茶",
-                signature_desc: "體驗我們獨家茶葉調配的深度，與新鮮有機牛奶完美平衡。我們的招牌飲品以其獨特的色調和清爽的口感捕捉了海洋的精髓。"
+                location_title: "門市位置",
+                address: "地址：",
             }
         };
 
