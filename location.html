@@ -1,438 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formosa Aroma - Premium Handcrafted Tea</title>
-    <style>
-        /* --- CSS 變數定義 --- */
-        :root {
-            --primary-blue: #111621; 
-            --secondary-yellow: #956424;
-            --text-gold: #cfaa68; 
-            --hover-glow: #ffeebb;
-        }
+<title>Formosa Aroma - Premium Handcrafted Tea</title>
+<style>
+    /* --- CSS 變數定義 --- */
+    :root {
+        --primary-blue: #111621; 
+        --secondary-yellow: #956424;
+        --text-gold: #cfaa68; 
+        --hover-glow: #ffeebb;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
-        }
-
-        html {
-            scroll-padding-top: 80px;
-        }
-
-        body {
-            background-color: var(--primary-blue);
-            color: var(--text-gold);
-            overflow-x: hidden;
-        }
-
-        /* --- 導覽列 (Navbar) --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 90px;
-            background-color: rgba(17, 22, 33, 0.95);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--secondary-yellow);
-        }
-
-        .nav-container {
-            width: 90%;
-            max-width: 1400px;
-            height: 100%;
-            display: flex;
-            justify-content: center; /* 讓 Logo 預設居中 */
-            align-items: center;
-            position: relative;
-        }
-
-        /* 新增：選單容器 (用來解決手機版重疊問題) */
-        .nav-content-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Logo 設定 */
-        .logo-container {
-            position: absolute;
-            left: 10%;
-            top: 50%;
-            transform: translate(-50%, -50%); /* 確保絕對居中 */
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--text-gold);
-            border-radius: 50%;
-            background-color: var(--primary-blue);
-            z-index: 20; /* Logo 層級高於選單文字 */
-        }
-
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
-
-        /* 選單佈局 */
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            flex: 1; /* 讓左右兩邊佔據剩餘空間 */
-        }
-
-        /* 左右分佈 */
-
-        .nav-right {
-            width: 100%;
-            justify-content: flex-end;
-        }
-
-        .nav-item {
-            position: relative;
-            cursor: pointer;
-            padding: 10px 0;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-gold);
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .nav-item:hover .nav-link {
-            color: var(--hover-glow);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-        }
-
-        /* --- Dropdown (下拉選單) --- */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--primary-blue);
-            border: 1px solid var(--secondary-yellow);
-            min-width: 180px;
-            list-style: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 10px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            top: 130%;
-        }
-
-        .dropdown li {
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        .dropdown li a {
-            text-decoration: none;
-            color: var(--text-gold);
-            display: block;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .dropdown li:hover a {
-            color: var(--hover-glow);
-            background-color: rgba(149, 100, 36, 0.2);
-        }
-
-        /* --- 手機版選單切換按鈕 --- */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            color: var(--text-gold);
-            cursor: pointer;
-            z-index: 1001; /* 按鈕要在最上層 */
-            position: absolute;
-            right: 0;
-        }
-        
-        .location-section {
-            padding: 120px 10%;
-            background-color: var(--primary-blue);
-            align-items: center;
-            text-align: center;
-            flex-wrap: wrap;
-            padding-bottom: 5px;
-        }
-
-        .address-section {
-            padding-top: 30px;
-            padding-left: 10%;
-            padding-right: 10%;
-            background-color: var(--primary-blue);
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .location-text h2 {
-            font-size: 2.5rem;
-            color: var(--hover-glow);
-            display: inline-block;
-        }
-
-        .location-text p1 {
-            font-size: 1.8rem;
-            line-height: 1.2;
-            font-weight: bold;
-            text-align: left; 
-        }
-
-        .location-text p2 {
-            font-size: 1.3rem;
-            font-style: italic;
-            text-align: left;            
-        }
-        .location-box {
-            margin-top: 2%;
-            flex: 1;
-            height: 450px;
-            border: 2px solid var(--secondary-yellow);
-            padding: 10px;
-            box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
-        }
-
-        /* --- 響應式設計 (Mobile Fix) --- */
-        @media (max-width: 900px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .logo-container {
-                /* 手機版 Logo 稍微調整 */
-                width: 60px;
-                height: 60px;
-            }
-
-            /* 修正核心：將 nav-content-wrapper 變為滑動抽屜 */
-            .nav-content-wrapper {
-                position: fixed;
-                top: 0;
-                right: -100%; /* 預設隱藏在右側 */
-                width: 70%;
-                height: 100vh;
-                background-color: var(--primary-blue);
-                flex-direction: column; /* 垂直排列 */
-                justify-content: flex-start; /* 從上面開始排 */
-                padding-top: 80px; /* 避開頂部空間 */
-                transition: 0.4s ease;
-                z-index: 999;
-                border-left: 1px solid var(--secondary-yellow);
-                overflow-y: auto; /* 如果內容太多可以捲動 */
-            }
-
-            .nav-content-wrapper.active {
-                right: 0; /* 滑入 */
-            }
-
-            /* 取消原本左右分開的邏輯，變為垂直堆疊 */
-            .nav-right {
-                width: 100%;
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-                gap: 20px;
-                padding: 10px 0;
-            }
-
-            /* 手機版下拉選單改為直接顯示，方便點擊 */
-            .dropdown {
-                position: static;
-                transform: none;
-                border: none;
-                background: transparent;
-                box-shadow: none;
-                opacity: 1;
-                visibility: visible;
-                display: none; /* 預設收合，節省空間 */
-                padding: 10px 0;
-            }            
-            /* 在手機上，讓子選單有些縮排或區隔 */
-            .dropdown li {
-                padding: 5px 0;
-            }
-            .dropdown li a {
-                color: #aaa; /* 稍微暗一點以示區別 */
-            }
-
-            /* 手機上 hover 即顯示 (或是你可以改為點擊顯示) */
-            .nav-item:hover .dropdown {
-                display: block;
-            }
-        }
-        
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="nav-container">
-            <div class="logo-container">
-                <img src="https://d2s742iet3d3t1.cloudfront.net/restaurants/restaurant-165252000000000000/restaurant_1692665881.jpg?size=small" alt="Logo" class="logo-img">
-            </div>
-
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-            <div class="nav-content-wrapper" id="mobile-menu-drawer">
-              
-                <ul class="nav-links nav-right">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link" data-key="main">Main</a>
-                    </li> 
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link" data-key="about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="product">Product</a>
-                        <ul class="dropdown">
-                            <li><a href="#" data-key="whatsnew">What’s New</a></li>
-                            <li><a href="#" data-key="menu">Menu</a></li>
-                            <li><a href="#" data-key="catering">Catering Service</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="location.html" class="nav-link" data-key="store">Store Location</a>
-                        <ul class="dropdown">
-                            <li><a href="#Alhambra Store">Alhambra</a></li>
-                            <li><a href="#Temple City Store">Temple City</a></li>
-                            <li><a href="#San Jose Store">San Jose</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="join">Join Us</a>
-                        <ul class="dropdown">
-                            <li><a href="#" data-key="job">Job Opportunity</a></li>
-                            <li><a href="#" data-key="franchise">Franchise</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="language">Language</a>
-                        <ul class="dropdown">
-                            <li><a href="#" onclick="setLanguage('en')">English</a></li>
-                            <li><a href="#" onclick="setLanguage('zh')">Chinese (中文)</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div> </div>
-    </header>
-
-    <section class="location-section">
-        <div class="location-text">
-            <h2 data-key="location_title">Store Location</h2>
-        </div>        
-    </section>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
+    }
     
-    <section id="Alhambra Store" class="address-section">
-        <div class="location-text">
-            <p1>Alhambra Store <br> </p1>
-            <p2 data-key="address"> Address: </p2> <p2> 560 W Main St, Alhambra, CA 91801 </p2>
-        </div>
-        <div class="location-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.120231485619!2d-118.13512028844465!3d34.09206027302995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c56dd047aa53%3A0x153ba96d74cae2cb!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBBbGhhbWJyYSwgQ0E!5e0!3m2!1sen!2sus!4v1770690378653!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
+    .location-section {
+        padding-top: 50px;
+        background-color: var(--primary-blue);
+        align-items: center;
+        text-align: center;
+        flex-wrap: wrap;
+        padding-bottom: 5px;
+    }
 
-    <section id="Temple City Store" class="address-section">
-        <div class="location-text">
-            <p1>Temple City Store <br> </p1>
-            <p2 data-key="address"> Address: </p2> <p2>5570 Rosemead Blvd Suite 130, Temple City, CA 91780 </p2>
-        </div>
-        <div class="location-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.7679819485593!2d-118.07566188844434!3d34.101083773026524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2db6ba01a5be9%3A0xc5afc6cc71c2060e!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBUZW1wbGUgQ2l0eSwgQ0E!5e0!3m2!1sen!2sus!4v1770689617968!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
+    .address-section {
+        padding-top: 30px;
+        padding-left: 10%;
+        padding-right: 10%;
+        background-color: var(--primary-blue);
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .location-text h2 {
+        font-size: 2.5rem;
+        color: var(--hover-glow);
+        display: inline-block;
+    }
 
-    <section id="San Jose Store" class="address-section">
-        <div class="location-text">
-            <p1>San Jose Store <br> </p1>
-            <p2 data-key="address"> Address: </p2> <p2>5205 Prospect Rd #135, San Jose, CA 95129 </p2>
-        </div>
-        <div class="location-box">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3174.0985596357928!2d-121.99453228831179!3d37.292797871994495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcb814e18c82f%3A0x3256eca7b766ce9c!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBTYW4gSm9zZSwgQ0E!5e0!3m2!1sen!2sus!4v1770689656590!5m2!1sen!2sus" width="100%" height="425" style="border:0; " allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
+    .location-text p1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        font-weight: bold;
+        text-align: left; 
+    }
 
-    <script>
-        const translations = {
-            en: {
-                main: "Main",
-                about: "About Us",
-                product: "Product",
-                whatsnew: "What’s New",
-                menu: "Menu",
-                catering: "Catering Service",
-                store: "Store Location",
-                join: "Join Us",
-                job: "Job Opportunity",
-                franchise: "Franchise",
-                language: "Language",
-                location_title: "Store Location",
-                address: "Address: ",
-            },
-            zh: {
-                main: "首頁",
-                about: "關於島嶼",
-                product: "關於產品",
-                whatsnew: "新品介紹",
-                menu: "飲品菜單",
-                catering: "飲品服務",
-                store: "門市位置",
-                join: "加入我們",
-                job: "工作機會",
-                franchise: "加盟",
-                language: "語言",
-                location_title: "門市位置",
-                address: "地址：",
+    .location-text p2 {
+        font-size: 1.3rem;
+        font-style: italic;
+        text-align: left;            
+    }
+    .location-box {
+        margin-top: 2%;
+        flex: 1;
+        height: 450px;
+        border: 2px solid var(--secondary-yellow);
+        padding: 10px;
+        box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
+    }
+    
+</style>
+
+<section class="location-section">
+    <div class="location-text">
+        <h2 data-key="location_title">Store Location</h2>
+    </div>        
+</section>
+
+<section id="alhambra-store" class="address-section">
+    <div class="location-text">
+        <p1>Alhambra Store <br> </p1>
+        <p2 data-key="address"> Address: </p2> <p2> 560 W Main St, Alhambra, CA 91801 </p2>
+    </div>
+    <div class="location-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3304.120231485619!2d-118.13512028844465!3d34.09206027302995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c56dd047aa53%3A0x153ba96d74cae2cb!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBBbGhhbWJyYSwgQ0E!5e0!3m2!1sen!2sus!4v1770690378653!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+<section id="temple-city-store" class="address-section">
+    <div class="location-text">
+        <p1>Temple City Store <br> </p1>
+        <p2 data-key="address"> Address: </p2> <p2>5570 Rosemead Blvd Suite 130, Temple City, CA 91780 </p2>
+    </div>
+    <div class="location-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3303.7679819485593!2d-118.07566188844434!3d34.101083773026524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2db6ba01a5be9%3A0xc5afc6cc71c2060e!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBUZW1wbGUgQ2l0eSwgQ0E!5e0!3m2!1sen!2sus!4v1770689617968!5m2!1sen!2sus" width="100%" height="425" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+<section id="san-jose-store" class="address-section">
+    <div class="location-text">
+        <p1>San Jose Store <br> </p1>
+        <p2 data-key="address"> Address: </p2> <p2>5205 Prospect Rd #135, San Jose, CA 95129 </p2>
+    </div>
+    <div class="location-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3174.0985596357928!2d-121.99453228831179!3d37.292797871994495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcb814e18c82f%3A0x3256eca7b766ce9c!2zRm9ybW9zYSBBcm9tYSDls7bltrzojLbphIkgLSBTYW4gSm9zZSwgQ0E!5e0!3m2!1sen!2sus!4v1770689656590!5m2!1sen!2sus" width="100%" height="425" style="border:0; " allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+
+<script>
+    const translations = {
+        en: {
+            main: "Main",
+            about: "About Us",
+            product: "Product",
+            whatsnew: "What’s New",
+            menu: "Menu",
+            catering: "Catering Service",
+            store: "Store Location",
+            join: "Join Us",
+            job: "Job Opportunity",
+            franchise: "Franchise",
+            language: "Language",
+            location_title: "Store Location",
+            address: "Address: ",
+        },
+        zh: {
+            main: "首頁",
+            about: "關於島嶼",
+            product: "關於產品",
+            whatsnew: "新品介紹",
+            menu: "飲品菜單",
+            catering: "飲品服務",
+            store: "門市位置",
+            join: "加入我們",
+            job: "工作機會",
+            franchise: "加盟",
+            language: "語言",
+            location_title: "門市位置",
+            address: "地址：",
+        }
+    };
+
+    function setLanguage(lang) {
+        const elements = document.querySelectorAll('[data-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                el.textContent = translations[lang][key];
             }
-        };
+        });
+    }
 
-        function setLanguage(lang) {
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-        }
-
-        // 修改後的開關邏輯：只控制 Wrapper
-        function toggleMenu() {
-            const drawer = document.getElementById('mobile-menu-drawer');
-            drawer.classList.toggle('active');
-        }
-    </script>
-</body>
-
-</html>
+    // 修改後的開關邏輯：只控制 Wrapper
+    function toggleMenu() {
+        const drawer = document.getElementById('mobile-menu-drawer');
+        drawer.classList.toggle('active');
+    }
+</script>

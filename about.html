@@ -1,424 +1,140 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formosa Aroma - Premium Handcrafted Tea</title>
-    <style>
-        /* --- CSS 變數定義 --- */
-        :root {
-            --primary-blue: #111621; 
-            --secondary-yellow: #956424;
-            --text-gold: #cfaa68; 
-            --hover-glow: #ffeebb;
-        }
+<title>Formosa Aroma - Premium Handcrafted Tea</title>
+<style>
+    /* --- CSS 變數定義 --- */
+    :root {
+        --primary-blue: #111621; 
+        --secondary-yellow: #956424;
+        --text-gold: #cfaa68; 
+        --hover-glow: #ffeebb;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
+    }
+    
+    .about1-section {
+        padding-top: 50px;
+        background-color: var(--primary-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .about2-section {
+        padding: 10px 10%;
+        background-color: var(--primary-blue);
+        color: var(--text-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .about-image img {
+        width:80%;
+        max-width: 1000px;
+        padding-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .about-product-text {
+        flex: 1;
+        min-width: 300px;
+    }
 
-        html {
-            scroll-padding-top: 80px;
-        }
+    .about-product-text h2 {
+        font-size: 2.5rem;
+        color: var(--hover-glow);
+        text-align: center;
+    }
 
-        body {
-            background-color: var(--primary-blue);
-            color: var(--text-gold);
-            overflow-x: hidden;
-        }
+    .about-product-text p {
+        text-indent: 50px;
+        font-size: 1.3rem;
+        line-height: 1.8;
+        text-align: justify;
+        padding-bottom: 10px;
+    }
 
-        /* --- 導覽列 (Navbar) --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 90px;
-            background-color: rgba(17, 22, 33, 0.95);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--secondary-yellow);
-        }
+</style>
 
-        .nav-container {
-            width: 90%;
-            max-width: 1400px;
-            height: 100%;
-            display: flex;
-            justify-content: center; /* 讓 Logo 預設居中 */
-            align-items: center;
-            position: relative;
-        }
+<section class="about1-section">
+    <div class="about-product-text">
+        <h2 data-key="signature_title">About Formosa Aroma</h2>
+    </div>
+</section>
+<section class="about2-section">
+    <div class="about-image">
+        <img src="https://github.com/tychang1014/formosa.aroma/blob/main/Signatures.png?raw=true" alt="Signature Drink">
+    </div>
+</section>
 
-        /* 新增：選單容器 (用來解決手機版重疊問題) */
-        .nav-content-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+<section class="about2-section">
+    <div class="about-product-text">
+        <p data-key="signature_desc">
+            <b style="font-size: 1.6rem; ">Formosa Aroma</b>
+            is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture. 
+        </p>
+        <p data-key="signature_desc2">                
+            With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we continue to strive for excellence in every cup we serve.
+        </p>
+    </div>
+</section>
 
-        /* Logo 設定 */
-        .logo-container {
-            position: absolute;
-            left: 10%;
-            top: 50%;
-            transform: translate(-50%, -50%); /* 確保絕對居中 */
-            width: 80px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--text-gold);
-            border-radius: 50%;
-            background-color: var(--primary-blue);
-            z-index: 20; /* Logo 層級高於選單文字 */
+<script>
+    const translations = {
+        en: {
+            main: "Main",
+            about: "About Us",
+            product: "Product",
+            whatsnew: "What’s New",
+            menu: "Menu",
+            catering: "Catering Service",
+            store: "Store Location",
+            join: "Join Us",
+            job: "Job Opportunity",
+            franchise: "Franchise",
+            language: "Language",
+            signature_title: "About Formosa Aroma",
+            signature_desc: "is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture.",
+            signature_desc2: "With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we invite you to craft your own flavor journey, where tradition meets creativity in every sip."
+        },
+        zh: {
+            main: "首頁",
+            about: "關於島嶼",
+            product: "關於產品",
+            whatsnew: "新品介紹",
+            menu: "飲品菜單",
+            catering: "飲品服務",
+            store: "門市位置",
+            join: "加入我們",
+            job: "工作機會",
+            franchise: "加盟",
+            language: "語言",
+            signature_title: "關於島嶼茶鄉",
+            signature_desc: "Formosa Aroma 致力於傳承與呈現正宗台灣茶香。堅持以嚴選高品質茶葉，融合傳統工藝與創新技術，確保每一杯茶都展現台灣茶深厚的底蘊、純淨風味與卓越品質。",
+            signature_desc2: "我們提供超過 20 種可客製化配料選擇，為顧客打造獨一無二的個人化品茶體驗。憑藉對品質與創新的堅持，Formosa Aroma 在市場中持續建立良好的口碑。我們誠摯的邀請您來打造屬於您的專屬風味，讓每一口都能喝到台灣的細緻與創新。"
         }
+    };
 
-        .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 50%;
-        }
-
-        /* 選單佈局 */
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            flex: 1; /* 讓左右兩邊佔據剩餘空間 */
-        }
-
-        /* 左右分佈 */
-
-        .nav-right {
-            width: 100%;
-            justify-content: flex-end;
-        }
-
-        .nav-item {
-            position: relative;
-            cursor: pointer;
-            padding: 10px 0;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-gold);
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-        }
-
-        .nav-item:hover .nav-link {
-            color: var(--hover-glow);
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-        }
-
-        /* --- Dropdown (下拉選單) --- */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--primary-blue);
-            border: 1px solid var(--secondary-yellow);
-            min-width: 180px;
-            list-style: none;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            padding: 10px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            top: 130%;
-        }
-
-        .dropdown li {
-            padding: 10px 20px;
-            text-align: center;
-        }
-
-        .dropdown li a {
-            text-decoration: none;
-            color: var(--text-gold);
-            display: block;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .dropdown li:hover a {
-            color: var(--hover-glow);
-            background-color: rgba(149, 100, 36, 0.2);
-        }
-
-        /* --- 手機版選單切換按鈕 --- */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            color: var(--text-gold);
-            cursor: pointer;
-            z-index: 1001; /* 按鈕要在最上層 */
-            position: absolute;
-            right: 0;
-        }
-        .signature-section {
-            padding-top: 120px;
-            background-color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .about-section {
-            padding: 10px 10%;
-            background-color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .product-image img {
-            width:80%;
-            padding-top: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .product-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .product-text h2 {
-            font-size: 2.5rem;
-            color: var(--hover-glow);
-            text-align: center;
-        }
-
-        .product-text p {
-            text-indent: 50px;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            text-align: justify;
-            padding-bottom: 10px;
-        }
-
-        /* --- 響應式設計 (Mobile Fix) --- */
-        @media (max-width: 900px) {
-            .menu-toggle {
-                display: block;
+    function setLanguage(lang) {
+        const elements = document.querySelectorAll('[data-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (translations[lang][key]) {
+                el.textContent = translations[lang][key];
             }
+        });
+    }
 
-            .logo-container {
-                /* 手機版 Logo 稍微調整 */
-                width: 60px;
-                height: 60px;
-            }
-
-            /* 修正核心：將 nav-content-wrapper 變為滑動抽屜 */
-            .nav-content-wrapper {
-                position: fixed;
-                top: 0;
-                right: -100%; /* 預設隱藏在右側 */
-                width: 70%;
-                height: 100vh;
-                background-color: var(--primary-blue);
-                flex-direction: column; /* 垂直排列 */
-                justify-content: flex-start; /* 從上面開始排 */
-                padding-top: 80px; /* 避開頂部空間 */
-                transition: 0.4s ease;
-                z-index: 999;
-                border-left: 1px solid var(--secondary-yellow);
-                overflow-y: auto; /* 如果內容太多可以捲動 */
-            }
-
-            .nav-content-wrapper.active {
-                right: 0; /* 滑入 */
-            }
-
-            /* 取消原本左右分開的邏輯，變為垂直堆疊 */
-            .nav-right {
-                width: 100%;
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                align-items: center;
-                gap: 20px;
-                padding: 10px 0;
-            }
-
-            /* 手機版下拉選單改為直接顯示，方便點擊 */
-            .dropdown {
-                position: static;
-                transform: none;
-                border: none;
-                background: transparent;
-                box-shadow: none;
-                opacity: 1;
-                visibility: visible;
-                display: none; /* 預設收合，節省空間 */
-                padding: 10px 0;
-            }            
-            /* 在手機上，讓子選單有些縮排或區隔 */
-            .dropdown li {
-                padding: 5px 0;
-            }
-            .dropdown li a {
-                color: #aaa; /* 稍微暗一點以示區別 */
-            }
-
-            /* 手機上 hover 即顯示 (或是你可以改為點擊顯示) */
-            .nav-item:hover .dropdown {
-                display: block;
-            }
-            
-            
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="nav-container">
-            <div class="logo-container">
-                <img src="https://d2s742iet3d3t1.cloudfront.net/restaurants/restaurant-165252000000000000/restaurant_1692665881.jpg?size=small" alt="Logo" class="logo-img">
-            </div>
-
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-            <div class="nav-content-wrapper" id="mobile-menu-drawer">
-              
-                <ul class="nav-links nav-right">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link" data-key="main">Main</a>
-                    </li> 
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link" data-key="about">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="product">Product</a>
-                        <ul class="dropdown">
-                            <li><a href="#" data-key="whatsnew">What’s New</a></li>
-                            <li><a href="#" data-key="menu">Menu</a></li>
-                            <li><a href="#" data-key="catering">Catering Service</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="location.html" class="nav-link" data-key="store">Store Location</a>
-                        <ul class="dropdown">
-                            <li><a href="location.html#Alhambra Store">Alhambra</a></li>
-                            <li><a href="location.html#Temple City Store">Temple City</a></li>
-                            <li><a href="location.html#San Jose Store">San Jose</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="join">Join Us</a>
-                        <ul class="dropdown">
-                            <li><a href="#" data-key="job">Job Opportunity</a></li>
-                            <li><a href="#" data-key="franchise">Franchise</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" data-key="language">Language</a>
-                        <ul class="dropdown">
-                            <li><a href="#" onclick="setLanguage('en')">English</a></li>
-                            <li><a href="#" onclick="setLanguage('zh')">Chinese (中文)</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div> </div>
-    </header>
-
-    <section class="signature-section">
-        <div class="product-text">
-            <h2 data-key="signature_title">About Formosa Aroma</h2>
-        </div>
-    </section>
-    <section class="about-section">
-        <div class="product-image">
-            <img src="https://github.com/tychang1014/formosa.aroma/blob/main/Signatures.png?raw=true" alt="Signature Drink">
-        </div>
-    </section>
-
-    <section class="about-section">
-        <div class="product-text">
-            <p data-key="signature_desc">
-                <b style="font-size: 1.6rem; ">Formosa Aroma</b>
-                is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture. 
-            </p>
-            <p data-key="signature_desc2">                
-                With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we continue to strive for excellence in every cup we serve.
-            </p>
-        </div>
-    </section>
-
-    <script>
-        const translations = {
-            en: {
-                main: "Main",
-                about: "About Us",
-                product: "Product",
-                whatsnew: "What’s New",
-                menu: "Menu",
-                catering: "Catering Service",
-                store: "Store Location",
-                join: "Join Us",
-                job: "Job Opportunity",
-                franchise: "Franchise",
-                language: "Language",
-                signature_title: "About Formosa Aroma",
-                signature_desc: "is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture.",
-                signature_desc2: "With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we invite you to craft your own flavor journey, where tradition meets creativity in every sip."
-            },
-            zh: {
-                main: "首頁",
-                about: "關於島嶼",
-                product: "關於產品",
-                whatsnew: "新品介紹",
-                menu: "飲品菜單",
-                catering: "飲品服務",
-                store: "門市位置",
-                join: "加入我們",
-                job: "工作機會",
-                franchise: "加盟",
-                language: "語言",
-                signature_title: "關於島嶼茶鄉",
-                signature_desc: "Formosa Aroma 致力於傳承與呈現正宗台灣茶香。堅持以嚴選高品質茶葉，融合傳統工藝與創新技術，確保每一杯茶都展現台灣茶深厚的底蘊、純淨風味與卓越品質。",
-                signature_desc2: "我們提供超過 20 種可客製化配料選擇，為顧客打造獨一無二的個人化品茶體驗。憑藉對品質與創新的堅持，Formosa Aroma 在市場中持續建立良好的口碑。我們誠摯的邀請您來打造屬於您的專屬風味，讓每一口都能喝到台灣的細緻與創新。"
-            }
-        };
-
-        function setLanguage(lang) {
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    el.textContent = translations[lang][key];
-                }
-            });
-        }
-
-        // 修改後的開關邏輯：只控制 Wrapper
-        function toggleMenu() {
-            const drawer = document.getElementById('mobile-menu-drawer');
-            drawer.classList.toggle('active');
-        }
-    </script>
-</body>
-</html>
+    // 修改後的開關邏輯：只控制 Wrapper
+    function toggleMenu() {
+        const drawer = document.getElementById('mobile-menu-drawer');
+        drawer.classList.toggle('active');
+    }
+</script>
