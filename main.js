@@ -106,13 +106,9 @@ function setLanguage(lang) {
 }
 
 
-// 4. 網頁初始化 (當使用者第一次進入網站時)
-document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
-    setLanguage(savedLang);
-});
 
 function toggleMenu() {
             const drawer = document.getElementById('mobile-menu-drawer');
             drawer.classList.toggle('active');
+
         }
