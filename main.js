@@ -115,6 +115,4 @@ document.addEventListener("DOMContentLoaded", () => {
 function toggleMenu() {
             const drawer = document.getElementById('mobile-menu-drawer');
             drawer.classList.toggle('active');
-
         }
-
