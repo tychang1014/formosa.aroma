@@ -5,6 +5,8 @@
     --text-gold: #cfaa68; 
     --hover-glow: #ffeebb;
     --body-text: #aeb5c0;
+    --card-bg: #1a2130;
+    --border-color: #2c3545;
 }
 
 * {
@@ -291,6 +293,335 @@ nav {
     text-align: justify;
     padding-bottom: 10px;
 }
+
+/* ---------- Menu Section ---------- */
+
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    /* 使用 margin-top 確保不吃掉原本 130px 的 Nav Bar */
+    padding-top: 130px !important; 
+    
+    /* 增加左右留邊，確保 MENU 不會貼邊 */
+    padding: 40px 5%; 
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--secondary-yellow);
+}
+
+.main-header h1 {
+    color: var(--text-gold);
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.main-header p {
+    color: var(--body-text);
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+}
+
+/* Tabs Navigation */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: transparent;
+    border: 1px solid var(--secondary-yellow);
+    color: var(--text-gold);
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.tab-btn:hover {
+    box-shadow: 0 0 10px var(--secondary-yellow);
+    color: var(--hover-glow);
+}
+
+.tab-btn.active {
+    background-color: var(--secondary-yellow);
+    color: #fff;
+}
+
+.tab-btn.special-tab {
+    border-color: var(--text-gold);
+    font-weight: bold;
+}
+
+/* Tab Content Logic */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active-content {
+    display: block;
+    /* 這裡的 130px 必須根據您 Nav Bar 的實際高度調整 */
+    min-height: 100vh;
+    background-color: var(--primary-blue); /* 確保背景色連貫 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    color: var(--hover-glow);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    border-left: 4px solid var(--secondary-yellow);
+    padding-left: 15px;
+    display: inline-block;
+}
+
+/* Menu Grid System */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* Menu Item Card */
+.menu-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu-item-highlight {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.menu-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--text-gold);
+}
+
+
+/* --- Dropdown (下拉選單) --- */
+.menu-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 180px;
+    z-index: 2000; /* 高於內容區塊，防止被遮住 */
+    top: 100%; /* 緊貼按鈕下方 */
+    left: 50%;
+    transform: translateX(-50%); /* 水平置中於按鈕 */
+}
+
+.menu-dropdown-content a {
+    color: var(--text-gold);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    transition: 0.3s;
+}
+
+.menu-dropdown-content a:hover {
+    background-color: var(--secondary-yellow);
+    color: #fff;
+}
+
+.menu-dropdown:hover .menu-dropdown-content {
+    display: block;
+    animation: dropDownFade 0.3s ease-out;
+}
+
+@keyframes dropDownFade {
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.item-info h3 {
+    color: var(--text-gold);
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+}
+
+.chinese-name {
+    display: block;
+    color: var(--body-text);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.desc {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.item-price {
+    font-size: 1.3rem;
+    color: var(--hover-glow);
+    font-weight: bold;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Craft Your Own & Sweetness Chart Styles */
+.step-badge {
+    background-color: var(--secondary-yellow);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.detail-list {
+    list-style: none;
+    margin-top: 10px;
+    color: var(--body-text);
+}
+
+.detail-list li::before {
+    content: "•";
+    color: var(--secondary-yellow);
+    margin-right: 8px;
+}
+
+#tea-base-card {
+    display: block;
+    text-align: center;
+}
+
+#tea-base-card .detail-list {
+    list-style: none;
+}
+
+#tea-base-card .detail-list li {
+    font-size: 1.1rem;
+    color: var(--hover-glow);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* 移除茶底列表的圓點，因為置中後圓點會很奇怪 */
+#tea-base-card .detail-list li::before {
+    display: none; 
+}
+
+.topping-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.topping-tags span {
+    background-color: rgba(149, 100, 36, 0.2);
+    border: 1px solid var(--secondary-yellow);
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    border-radius: 15px;
+}
+
+/* Sweetness/Ice Chart Integration */
+.customization-chart {
+    background-color: var(--card-bg);
+    border: 2px solid var(--secondary-yellow);
+    padding: 30px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.chart-title {
+    color: var(--text-gold);
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.chart-column {
+    flex: 1;
+    min-width: 250px;
+}
+
+.chart-column h4 {
+    color: var(--hover-glow);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.level-bar {
+    display: flex;
+    flex-direction: column; /* Stack vertically to mimic the diagram */
+    gap: 15px;
+    align-items: center;
+}
+
+.level-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    justify-content: space-between;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    padding: 10px 20px;
+    border-left: 3px solid var(--text-gold);
+}
+
+.level-item .percent {
+    font-weight: bold;
+    color: var(--text-gold);
+    font-size: 1.2rem;
+}
+
+.level-item .label {
+    color: var(--body-text);
+}
+
+.hot-option {
+    border-left: 3px solid #ff6b6b;
+}
+.hot-option .percent { color: #ff6b6b; }
 
 /* ---------- 茶葉---------- */
 /* 滾動條樣式 */
@@ -604,7 +935,82 @@ header p {
         font-size: 1.2rem;
     }
 
-    /* 手機上 hover 即顯示 (或是你可以改為點擊顯示) */
+    /* Menu Section */
+    .tabs-container {
+        display: flex;
+        flex-direction: column; /* 垂直疊起 */
+        align-items: center;    /* 水平置中 */
+        gap: 12px;
+        width: 100%;
+        margin-bottom: 30px;
+    }   
+    
+    .tab-btn {
+        width: 70% !important; /* 只佔螢幕 70% 寬度 */
+        max-width: 280px;      /* 限制最大寬度防止在大手機上太長 */
+        padding: 10px 15px !important;
+        font-size: 0.95rem !important;
+        text-align: center;
+        border-radius: 5px;
+        margin: 0 auto;        /* 確保按鈕本身在容器內置中 */
+    }
+
+    /* 2. Menu 變為單行 */
+    .menu-grid {
+        grid-template-columns: 1fr;
+        padding: 0 10%; 
+    }
+
+    /* 3. Craft Your Own 區塊縮小置中 */
+    .highlight-card {
+        width: 100% !important;
+        margin: 0 auto 20px auto !important;
+        display: block !important;
+    }
+
+    /* 5. 調低整體上方邊距，適應手機導覽列高度 (可依需求調整) */
+
+    .menu-dropdown {
+        width: 100%;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+    }
+    .menu-dropdown-content {
+        position: relative;
+        width: 30%;
+        overflow: hidden;    /* 隱藏溢出的內容 */
+        text-align: center;
+        /* 設定初始高度與動畫 */
+        max-height: 0;        
+        transition: max-height 0.4s ease, margin 0.4s ease;
+    }
+    .menu-dropdown:hover .menu-dropdown-content {
+    /* 當移入時，設定一個足夠大的高度，這會觸發「往下推」的動作 */
+        max-height: 300px; 
+        margin-top: 10px;  /* 自動調整展開後的間距 */
+        margin-bottom: 10px;
+    }
+    .menu-container {
+        margin-top: 100px; 
+        padding: 20px 15px;
+    }
+    .customization-chart {
+        width: 80% !important;
+        margin: 0 auto 20px auto !important;
+        margin-top: 20px !important;
+        display: block !important;
+    }   
+
+    .section-title {
+        margin-left: 95px;
+    }
+    .section-subtitle {
+        margin-left: 95px;
+        margin-bottom: 30px;
+    }
+
+    /* Tea */
     .nav-item:hover .dropdown {
         display: block;
     }
@@ -620,5 +1026,5 @@ header p {
 
 /* 這個高度要等於你 nav 的 height */
 body {
-margin-top: 130px; 
+    margin-top: 130px !important;
 }

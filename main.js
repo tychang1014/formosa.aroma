@@ -5,6 +5,12 @@ function loadPage(page, targetId = null) {
       document.getElementById("content").innerHTML = data;
       initObserver();
 
+      const drawer = document.getElementById('mobile-menu-drawer');
+      if (drawer && drawer.classList.contains('active')) {
+          drawer.classList.remove('active'); // 讓導覽列彈回去
+      }
+      initObserver();
+
       // 2. 【關鍵修正】取得目前儲存的語系（如果沒存過，預設為 'en'）
       const currentLang = localStorage.getItem('preferredLanguage') || 'en';
       
@@ -113,6 +119,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function toggleMenu() {
-            const drawer = document.getElementById('mobile-menu-drawer');
-            drawer.classList.toggle('active');
-        }
+    const drawer = document.getElementById('mobile-menu-drawer');
+    if (drawer) {
+        drawer.classList.toggle('active');
+    }
+}
+
+function closeDropdownMobile() {
+    // 點擊選項後，如果是在手機版，可以連同導覽面板一起收起
+    const drawer = document.getElementById('mobile-menu-drawer');
+    if (drawer) {
+        drawer.classList.remove('active');
+    }
+}
+
+function openTab(evt, storeName) {
+    // 1. Get all elements with class="tab-content" and hide them
+    var tabContent = document.getElementsByClassName("tab-content");
+    for (var i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
+        tabContent[i].classList.remove("active-content");
+    }
+
+    // 2. Get all elements with class="tab-btn" and remove the class "active"
+    var tabLinks = document.getElementsByClassName("tab-btn");
+    for (var i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+    }
+
+    // 3. Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(storeName).style.display = "block";
+    
+    // Add a small timeout to allow display:block to render before adding opacity class for animation
+    setTimeout(() => {
+        document.getElementById(storeName).classList.add("active-content");
+    }, 10);
+    
+    evt.currentTarget.className += " active";
+}
