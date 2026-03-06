@@ -332,9 +332,22 @@ nav {
 .tabs-container {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     gap: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    background-color: var(--primary-blue); /* 務必確保有背景色 */
+    padding: 15px 0;
+}
+.menu-dropdown,
+.tab-btn {
+    flex: 0 0 auto;
 }
 
 .tab-btn {
@@ -342,9 +355,14 @@ nav {
     border: 1px solid var(--secondary-yellow);
     color: var(--text-gold);
     padding: 12px 24px;
+    min-width: 230px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition:
+        color 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
     letter-spacing: 1px;
 }
 
@@ -374,11 +392,6 @@ nav {
     /* 這裡的 130px 必須根據您 Nav Bar 的實際高度調整 */
     min-height: 100vh;
     background-color: var(--primary-blue); /* 確保背景色連貫 */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .section-title {
@@ -427,23 +440,33 @@ nav {
 
 /* --- Dropdown (下拉選單) --- */
 .menu-dropdown {
+    display: flex;
+    flex-direction: column; /* 讓按鈕與選單垂直排列 */
+    align-items: center;    /* 讓選單相對於按鈕置中 */
     position: relative;
-    display: inline-block;
 }
 
 .menu-dropdown-content {
-    display: none;
-    position: absolute;
-    min-width: 180px;
-    z-index: 2000; /* 高於內容區塊，防止被遮住 */
-    top: 100%; /* 緊貼按鈕下方 */
-    left: 50%;
-    transform: translateX(-50%); /* 水平置中於按鈕 */
+/* 保持預設的 position: static 或 relative，這樣它就會佔用空間並推開內容 */
+    display: block;
+    width: 0%;
+    white-space: nowrap;  /* 防止文字折行撐開寬度 */
+    margin: 0 auto;
+    min-width: 200px; /* 給予固定最小寬度，防止展開時擠壓到旁邊的按鈕 */
+    
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+.menu-dropdown:hover .menu-dropdown-content {
+    max-height: 500px; /* 視內容調整 */
+    opacity: 1;
 }
 
 .menu-dropdown-content a {
     color: var(--text-gold);
-    padding: 12px 16px;
+    padding: 0.8em 0;
     text-decoration: none;
     display: block;
     font-size: 0.9rem;
@@ -453,18 +476,17 @@ nav {
 }
 
 .menu-dropdown-content a:hover {
-    background-color: var(--secondary-yellow);
-    color: #fff;
-}
-
-.menu-dropdown:hover .menu-dropdown-content {
-    display: block;
-    animation: dropDownFade 0.3s ease-out;
+    color: var(--hover-glow);
+    background-color: rgba(149, 100, 36, 0.2);
 }
 
 @keyframes dropDownFade {
     from { opacity: 0; transform: translate(-50%, -10px); }
     to { opacity: 1; transform: translate(-50%, 0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .item-info h3 {
@@ -876,6 +898,8 @@ header p {
 @media (max-width: 1100px) {
     .menu-toggle {
         display: block;
+        position: fixed;
+        z-index: 10000;
     }
 
     .logo-container {
@@ -896,7 +920,7 @@ header p {
         justify-content: flex-start; /* 從上面開始排 */
         padding-top: 80px; /* 避開頂部空間 */
         transition: 0.4s ease;
-        z-index: 999;
+        z-index: 9999 !important;
         border-left: 1px solid var(--secondary-yellow);
         overflow-y: auto; /* 如果內容太多可以捲動 */
     }
@@ -943,6 +967,12 @@ header p {
         gap: 12px;
         width: 100%;
         margin-bottom: 30px;
+
+        position: relative;
+        top: 0;
+        z-index: 100;
+        background-color: var(--primary-blue);
+        padding: 10px 0;
     }   
     
     .tab-btn {
@@ -978,6 +1008,7 @@ header p {
     }
     .menu-dropdown-content {
         position: relative;
+        display: block;
         width: 30%;
         overflow: hidden;    /* 隱藏溢出的內容 */
         text-align: center;

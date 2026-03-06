@@ -157,3 +157,33 @@ function openTab(evt, storeName) {
     
     evt.currentTarget.className += " active";
 }
+
+function openSubTab(evt, storeId, btnId, targetSectionId) {
+    // 阻止連結跳轉
+    evt.preventDefault(); 
+
+    // 1. 先執行切換內容
+    openTab(evt, storeId);
+
+    // 2. 修正：強制讓正確的主按鈕變亮
+    // 因為 openTab 會把所有 tab-btn 的 active 拔掉，我們要補回來
+    setTimeout(() => {
+        var allBtns = document.querySelectorAll(".tab-btn");
+        allBtns.forEach(btn => btn.classList.remove("active"));
+        
+        var mainBtn = document.getElementById(btnId);
+        if (mainBtn) {
+            mainBtn.classList.add("active");
+        }
+    }, 20); // 稍微延遲，確保在 openTab 的執行之後
+
+    // 3. 跳轉到指定區塊
+    if (targetSectionId) {
+        setTimeout(() => {
+            const target = document.getElementById(targetSectionId);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }, 200); 
+    }
+}
