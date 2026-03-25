@@ -6,154 +6,547 @@
     
     <div class="tabs-container">
         <div class="menu-dropdown">
-            <button id="alhambra-btn" class="tab-btn" onclick="openTab(event, 'alhambra')">Alhambra Menu </button>
+            <button class="tab-btn active" onclick="openTab(event, 'alhambra')">Alhambra Store        </button>
             <div class="menu-dropdown-content">
-                <a href="#" data-key="formosan-teaspresso" onclick="openSubTab(event, 'alhambra', 'alhambra-btn', '111')">Formosan Teaspresso</a>
-                <a href="#" data-key="formosan-milk-tea" onclick="openSubTab(event, 'alhambra', 'alhambra-btn', '222')">Formosan Milk Tea</a>
-                <a href="#" data-key="formosan-cream-foam" onclick="openSubTab(event, 'alhambra', 'alhambra-btn')">Formosan Cream Foam</a>
-                <a href="#" data-key="formosan-fruit-tea" onclick="openSubTab(event, 'alhambra', 'alhambra-btn')">Formosan Fruit Tea</a>
-                <a href="#" data-key="formosan-yogurt" onclick="openSubTab(event, 'alhambra', 'alhambra-btn')">Formosan Yogurt</a>
-                <a href="#" data-key="formosan-typhoon" onclick="openSubTab(event, 'alhambra', 'alhambra-btn')">Formosan Typhoon</a>
-                <a href="#" data-key="formosan-specialty" onclick="openSubTab(event, 'alhambra', 'alhambra-btn')">Formosan Specialty</a>
-                </div>
+                <a href="#" data-key="teaspresso" onclick="openTabAndScroll('alhambra', 'al-teaspresso')">Teaspresso</a>
+                <a href="#" data-key="milk-tea" onclick="openTabAndScroll('alhambra', 'al-milktea')">Milk Tea</a>
+                <a href="#" data-key="cream-foam" onclick="openTabAndScroll('alhambra', 'al-creamfoam')">Cream Foam</a>
+                <a href="#" data-key="fruit-tea" onclick="openTabAndScroll('alhambra', 'al-fruittea')">Fruit Tea</a>
+                <a href="#" data-key="yogurt" onclick="openTabAndScroll('alhambra', 'al-yogurt')">Yogurt</a>
+                <a href="#" data-key="typhoon" onclick="openTabAndScroll('alhambra', 'al-typhoon')">Typhoon</a>
+                <a href="#" data-key="specialty" onclick="openTabAndScroll('alhambra', 'al-specialty')">Specialty</a>
+            </div>
         </div>
-        <div class="menu-dropdown">
-            <button id="temple-city-btn" class="tab-btn" onclick="openTab(event, 'temple-city')">Temple City Menu </button>
-            <div class="menu-dropdown-content">
-                <a href="#" data-key="formosan-teaspresso" onclick="openSubTab(event, 'temple-city', 'temple-city-btn', '111')">Formosan Teaspresso</a>
-                <a href="#" data-key="formosan-milk-tea" onclick="openSubTab(event, 'temple-city', 'temple-city-btn', '222')">Formosan Milk Tea</a>
-                <a href="#" data-key="formosan-cream-foam" onclick="openSubTab(event, 'temple-city', 'temple-city-btn')">Formosan Cream Foam</a>
-                <a href="#" data-key="formosan-fruit-tea" onclick="openSubTab(event, 'temple-city', 'temple-city-btn')">Formosan Fruit Tea</a>
-                <a href="#" data-key="formosan-yogurt" onclick="openSubTab(event, 'temple-city', 'temple-city-btn')">Formosan Yogurt</a>
-                <a href="#" data-key="formosan-typhoon" onclick="openSubTab(event, 'temple-city', 'temple-city-btn')">Formosan Typhoon</a>
-                <a href="#" data-key="formosan-specialty" onclick="openSubTab(event, 'temple-city', 'temple-city-btn')">Formosan Specialty</a>
-                </div>
-        </div>
-        <div class="menu-dropdown">
-            <button id="san-jose-btn" class="tab-btn" onclick="openTab(event, 'san-jose')">San Jose Menu </button>
-            <div class="menu-dropdown-content">
-                <a href="#" data-key="formosan-teaspresso" onclick="openSubTab(event, 'san-jose', 'san-jose-btn', '111')">Formosan Teaspresso</a>
-                <a href="#" data-key="formosan-milk-tea" onclick="openSubTab(event, 'san-jose', 'san-jose-btn', '222')">Formosan Milk Tea</a>
-                <a href="#" data-key="formosan-cream-foam" onclick="openSubTab(event, 'san-jose', 'san-jose-btn')">Formosan Cream Foam</a>
-                <a href="#" data-key="formosan-fruit-tea" onclick="openSubTab(event, 'san-jose', 'san-jose-btn')">Formosan Fruit Tea</a>
-                <a href="#" data-key="formosan-yogurt" onclick="openSubTab(event, 'san-jose', 'san-jose-btn')">Formosan Yogurt</a>
-                <a href="#" data-key="formosan-typhoon" onclick="openSubTab(event, 'san-jose', 'san-jose-btn')">Formosan Typhoon</a>
-                <a href="#" data-key="formosan-specialty" onclick="openSubTab(event, 'san-jose', 'san-jose-btn')">Formosan Specialty</a>
-                </div>
-        </div>
-
+        <button class="tab-btn" onclick="openTab(event, 'temple-city')">Temple City Store</button>
+        <button class="tab-btn" onclick="openTab(event, 'san-jose')">San Jose Store</button>
         <button class="tab-btn special-tab" onclick="openTab(event, 'craft-own')">Craft Your Own Drink</button>
-        
     </div>
 
     <div id="alhambra" class="tab-content active-content">
-        <section id="111">
-            <h2 class="section-title">Alhambra Menu</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Osmanthus Rice Ferment Milk Tea</h3>
-                        <span class="chinese-name">桂花酒釀奶茶</span>
-                        <p class="desc">Formosan Milk Tea Series</p>
-                    </div>
-                    <div class="item-price">$7.25</div>
+        <h2 id="al-teaspresso" class="section-title">FORMOSAN TEASPRESSO 島嶼茶香</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Four Season Mountain Tea</h3>
+                    <span class="chinese-name">高山四季春</span>
                 </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Winter Melon Milk</h3>
-                        <span class="chinese-name">冬瓜鮮奶</span>
-                        <p class="desc">Caffeine Free Option</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Crème Brûlée Milk Tea</h3>
-                        <span class="chinese-name">焦糖布蕾奶茶</span>
-                        <p class="desc">Rich & Creamy</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Matcha Typhoon Slush</h3>
-                        <span class="chinese-name">島嶼抹茶颱風</span>
-                        <p class="desc">Formosan Typhoon Series</p>
-                    </div>
-                    <div class="item-price">$7.50</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Four Season Mountain Tea</h3>
-                        <span class="chinese-name">高山四季春</span>
-                        <p class="desc">Pure Tea Series</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Mango Passion Fruit Green Tea</h3>
-                        <span class="chinese-name">芒果百香</span>
-                        <p class="desc">Fruit Tea Series</p>
-                    </div>
-                    <div class="item-price">$7.00</div>
-                </div>
+                <div class="item-price">$6.25</div>
             </div>
-        </section>
-        <section id="222">
-            <h2 class="section-title">AlhaDDDDDDDra Menu</h2>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Osmanthus Rice Ferment Milk Tea</h3>
-                        <span class="chinese-name">桂花酒釀奶茶</span>
-                        <p class="desc">Formosan Milk Tea Series</p>
-                    </div>
-                    <div class="item-price">$7.25</div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Jinxuan Mountain Tea</h3>
+                    <span class="chinese-name">阿里山金萱</span>
                 </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Winter Melon Milk</h3>
-                        <span class="chinese-name">冬瓜鮮奶</span>
-                        <p class="desc">Caffeine Free Option</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Crème Brûlée Milk Tea</h3>
-                        <span class="chinese-name">焦糖布蕾奶茶</span>
-                        <p class="desc">Rich & Creamy</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Matcha Typhoon Slush</h3>
-                        <span class="chinese-name">島嶼抹茶颱風</span>
-                        <p class="desc">Formosan Typhoon Series</p>
-                    </div>
-                    <div class="item-price">$7.50</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Four Season Mountain Tea</h3>
-                        <span class="chinese-name">高山四季春</span>
-                        <p class="desc">Pure Tea Series</p>
-                    </div>
-                    <div class="item-price">$6.25</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <h3>Mango Passion Fruit Green Tea</h3>
-                        <span class="chinese-name">芒果百香</span>
-                        <p class="desc">Fruit Tea Series</p>
-                    </div>
-                    <div class="item-price">$7.00</div>
-                </div>
+                <div class="item-price">$6.25</div>
             </div>
-        
-        </section>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pouchong Green Tea</h3>
+                    <span class="chinese-name">文山包種茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Jasmine Green Tea</h3>
+                    <span class="chinese-name">茉香綠茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Biluochun Green Tea</h3>
+                    <span class="chinese-name">三峽碧螺春</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Ruby Black Tea</h3>
+                    <span class="chinese-name">紅玉紅茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Assam Black Tea</h3>
+                    <span class="chinese-name">阿薩姆紅茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Earl Grey Black Tea</h3>
+                    <span class="chinese-name">伯爵紅茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Golden Phoenix Oolong</h3>
+                    <span class="chinese-name">金鳳烏龍</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Iron Buddha Oolong</h3>
+                    <span class="chinese-name">鐵觀音</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Oriental Beauty Oolong</h3>
+                    <span class="chinese-name">東方美人茶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Rooibos Tea</h3>
+                    <span class="chinese-name">南非國寶茶</span>
+                    <p class="desc">Caffeine Free</p>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Hibiscus Tea</h3>
+                    <span class="chinese-name">洛神花茶</span>
+                    <p class="desc">Caffeine Free</p>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+        </div>
+
+        <h2 id="al-milktea" class="section-title">FORMOSAN MILK TEA 島嶼奶香</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Formosa Brown Sugar Boba Milk</h3>
+                    <span class="chinese-name">島嶼黑糖波霸鮮奶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Crème Brûlée Brown Sugar Boba Milk</h3>
+                    <span class="chinese-name">焦糖布蕾黑糖波霸鮮奶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Iron Buddha Milk Tea</h3>
+                    <span class="chinese-name">鐵觀音奶茶</span>
+                    <p class="desc">Creamer</p>
+                </div>
+                <div class="item-price">$6.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Dancing Crane Black Milk Tea</h3>
+                    <span class="chinese-name">舞鶴厚奶茶</span>
+                    <p class="desc">Evaporated Milk</p>
+                </div>
+                <div class="item-price">$6.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Oriental Beauty Milk Tea</h3>
+                    <span class="chinese-name">美人厚奶茶</span>
+                    <p class="desc">Evaporated Milk</p>
+                </div>
+                <div class="item-price">$6.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Golden Phoenix Milk Tea</h3>
+                    <span class="chinese-name">金鳳烏龍奶茶</span>
+                    <p class="desc">Creamer</p>
+                </div>
+                <div class="item-price">$6.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pouchong Green Milk Tea</h3>
+                    <span class="chinese-name">包種鮮奶綠</span>
+                    <p class="desc">Fresh Milk</p>
+                </div>
+                <div class="item-price">$6.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Caramel Pudding Milk Tea</h3>
+                    <span class="chinese-name">焦糖布丁奶茶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Matcha Pudding Milk Tea</h3>
+                    <span class="chinese-name">抹茶布丁奶茶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Ube Taro Puree Milk</h3>
+                    <span class="chinese-name">紫薯芋泥鮮奶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Osmanthus Milk Tea</h3>
+                    <span class="chinese-name">桂花釀奶茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Osmanthus Rice Ferment Milk Tea</h3>
+                    <span class="chinese-name">桂花酒釀奶茶</span>
+                </div>
+                <div class="item-price">$7.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Winter Melon Milk</h3>
+                    <span class="chinese-name">冬瓜鮮奶</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Ovaltine</h3>
+                    <span class="chinese-name">厚奶阿華田</span>
+                </div>
+                <div class="item-price">$6.25</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Crème Brûlée Milk Tea</h3>
+                    <span class="chinese-name">焦糖布蕾奶茶</span>
+                </div>
+                <div class="item-price">$7.75</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Azuki Matcha Latte</h3>
+                    <span class="chinese-name">宇治抹茶紅豆鮮奶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Black Sweet Rice Red Bean Coconut Latte</h3>
+                    <span class="chinese-name">黑糯米紅豆椰奶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+        </div>
+
+        <h2 id="al-creamfoam" class="section-title">FORMOSAN CREAM FOAM 島嶼奶蓋</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Sea Salt Cheese Foam Iced Tea / Milk Tea</h3>
+                    <span class="chinese-name">海鹽芝士奶蓋島嶼冰茶/奶茶</span>
+                </div>
+                <div class="item-price">$7.00 / $7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Sesame Cream Foam Milk Tea</h3>
+                    <span class="chinese-name">芝麻奶蓋島嶼奶茶</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Rose Cream Foam Iced Tea</h3>
+                    <span class="chinese-name">玫瑰奶蓋島嶼冰茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Lavender Cream Foam Iced Tea</h3>
+                    <span class="chinese-name">薰衣草奶蓋島嶼冰茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+        </div>
+
+        <h2 id="al-fruittea" class="section-title">FORMOSAN FRUIT TEA 島嶼果香</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Grapefruit Orange Green Tea</h3>
+                    <span class="chinese-name">鮮橙紅柚</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>White Peach Iced Tea</h3>
+                    <span class="chinese-name">白桃冰茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mango Passion Fruit Green Tea</h3>
+                    <span class="chinese-name">芒果百香綠茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pink Lady Apple Black Tea</h3>
+                    <span class="chinese-name">紅粉佳人蘋果紅茶</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pineapple Jasmine Green Tea</h3>
+                    <span class="chinese-name">茉香鳳梨</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Passion Fruit Mountain Tea</h3>
+                    <span class="chinese-name">百香四季春</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Jasmine Orange Green Tea</h3>
+                    <span class="chinese-name">鮮橙茉莉</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Cranberry Mountain Tea</h3>
+                    <span class="chinese-name">蔓越莓金萱</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Lychee Assam Black Tea</h3>
+                    <span class="chinese-name">阿姆薩荔枝紅</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Uji Matcha Limenade</h3>
+                    <span class="chinese-name">宇治抹茶靑檸露</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Basil Seed Wintermelon Calamansi</h3>
+                    <span class="chinese-name">山粉圓冬瓜金桔</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Aiyu Jelly Calamansi Limenade</h3>
+                    <span class="chinese-name">愛玉金桔檸檬</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Sugar Cane Mountain Tea</h3>
+                    <span class="chinese-name">甘蔗四季春</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Sugar Cane Passionfruit Green Tea</h3>
+                    <span class="chinese-name">甘蔗百香</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Winter Melon Limenade</h3>
+                    <span class="chinese-name">冬瓜靑檸</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Calamansi Green Tea</h3>
+                    <span class="chinese-name">包種金桔</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mango Pomelo Sago</h3>
+                    <span class="chinese-name">楊枝甘露</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+        </div>
+
+        <h2 id="al-yogurt" class="section-title">FORMOSAN YOGURT 島嶼多多</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Strawberry Banana Yogurt Smoothie</h3>
+                    <span class="chinese-name">草莓香蕉酸奶冰沙</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Mango Yogurt Sago Smoothie</h3>
+                    <span class="chinese-name">芒果酸奶西米冰沙</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Strawberry Yogurt Sago Smoothie</h3>
+                    <span class="chinese-name">草莓酸奶西米冰沙</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Black Sweet Rice Yogurt Smoothie</h3>
+                    <span class="chinese-name">黑糯米酸奶冰沙</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Matcha Black Sweet Rice Yogurt Smoothie</h3>
+                    <span class="chinese-name">抹茶黑糯米酸奶冰沙</span>
+                </div>
+                <div class="item-price">$7.00</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Jasmine Yakult Green Tea</h3>
+                    <span class="chinese-name">茉莉多多</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pink Guava Yakult Green Tea</h3>
+                    <span class="chinese-name">梅香芭樂多多</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Pineapple Yakult Green Tea</h3>
+                    <span class="chinese-name">鳳梨多多</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Passion Fruit Yakult Green Tea</h3>
+                    <span class="chinese-name">百香多多</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>White Peach Yakult Green Tea</h3>
+                    <span class="chinese-name">白桃多多</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+        </div>
+
+        <h2 id="al-typhoon" class="section-title">FORMOSAN TYPHOON 島嶼颱風</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Matcha Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼抹茶颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Ube Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼紫薯颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Sesame Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼芝麻颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Cocoa Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼可可颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Grape Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼葡萄颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Peach Typhoon Slush</h3>
+                    <span class="chinese-name">島嶼白桃颱風</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+        </div>
+
+        <h2 id="al-specialty" class="section-title">FORMOSAN SPECIALTY 島嶼特調</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Formosa Ocean (Blue Citrus)</h3>
+                    <span class="chinese-name">島嶼的海洋</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Formosa Aurora (Green Apple)</h3>
+                    <span class="chinese-name">島嶼的極光</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <h3>Formosa Moonlight (Grape)</h3>
+                    <span class="chinese-name">島嶼的月光</span>
+                </div>
+                <div class="item-price">$7.50</div>
+            </div>
+        </div>
     </div>
 
     <div id="temple-city" class="tab-content">
@@ -224,95 +617,95 @@
         </div>
     </div>
 
-    <div id="craft-own" class="tab-content">
-        <h2 class="section-title">Craft Your Own Drink</h2>
-        <p class="section-subtitle">Follow the steps to customize your perfect cup</p>
-        
-        <div class="menu-grid">
-            <div class="menu-item-highlight" id="tea-base-card">
-                <div class="step-badge">STEP 1</div>
-                <div class="item-info">
-                    <h3>Choose Your Tea Base</h3>
-                    <span class="chinese-name">選擇茶底</span>
-                    <ul class="detail-list">
-                        <li>Assam Black Tea (阿薩姆紅茶)</li>
-                        <li>Jasmine Green Tea (茉香綠茶)</li>
-                        <li>Four Season Oolong (四季春)</li>
-                        <li>Roasted Oolong (焙火烏龍)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="menu-item-highlight">
-                <div class="step-badge">STEP 2</div>
-                <div class="item-info">
-                    <h3>Choose Toppings</h3>
-                    <span class="chinese-name">選擇加料 (+$0.75)</span>
-                    <div class="topping-tags">
-                        <span>Boba 波霸</span>
-                        <span>Lychee Jelly 荔枝凍</span>
-                        <span>Grass Jelly 仙草</span>
-                        <span>Crystal Boba 寒天</span>
-                        <span>Cheese Foam 芝士奶蓋</span>
-                        <span>Aloe Vera 蘆薈</span>
-                    </div>
-                </div>
+<div id="craft-own" class="tab-content">
+    <h2 class="section-title">Craft Your Own Drink</h2>
+    <p class="section-subtitle">Follow the steps to customize your perfect cup</p>
+    
+    <div class="menu-grid">
+        <div class="menu-item-highlight" id="tea-base-card">
+            <div class="step-badge">STEP 1</div>
+            <div class="item-info">
+                <h3>Choose Your Tea Base</h3>
+                <span class="chinese-name">選擇茶底</span>
+                <ul class="detail-list">
+                    <li>Assam Black Tea (阿薩姆紅茶)</li>
+                    <li>Jasmine Green Tea (茉香綠茶)</li>
+                    <li>Four Season Oolong (四季春)</li>
+                    <li>Roasted Oolong (焙火烏龍)</li>
+                </ul>
             </div>
         </div>
 
-        <div class="customization-chart">
-            <h3 class="chart-title">CUSTOMIZATION GUIDE</h3>
-            
-            <div class="chart-container">
-                <div class="chart-column">
-                    <h4>SWEETNESS <span class="zh">甜度</span></h4>
-                    <div class="level-bar">
-                        <div class="level-item">
-                            <span class="percent">100%</span>
-                            <span class="label">Normal 正常</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">70%</span>
-                            <span class="label">Less 少糖</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">50%</span>
-                            <span class="label">Half 半糖</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">30%</span>
-                            <span class="label">Light 微糖</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">0%</span>
-                            <span class="label">None 無糖</span>
-                        </div>
+        <div class="menu-item-highlight">
+            <div class="step-badge">STEP 2</div>
+            <div class="item-info">
+                <h3>Choose Toppings</h3>
+                <span class="chinese-name">選擇加料 (+$0.75)</span>
+                <div class="topping-tags">
+                    <span>Boba 波霸</span>
+                    <span>Lychee Jelly 荔枝凍</span>
+                    <span>Grass Jelly 仙草</span>
+                    <span>Crystal Boba 寒天</span>
+                    <span>Cheese Foam 芝士奶蓋</span>
+                    <span>Aloe Vera 蘆薈</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="customization-chart">
+        <h3 class="chart-title">CUSTOMIZATION GUIDE</h3>
+        
+        <div class="chart-container">
+            <div class="chart-column">
+                <h4>SWEETNESS <span class="zh">甜度</span></h4>
+                <div class="level-bar">
+                    <div class="level-item">
+                        <span class="percent">100%</span>
+                        <span class="label">Normal 正常</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">70%</span>
+                        <span class="label">Less 少糖</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">50%</span>
+                        <span class="label">Half 半糖</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">30%</span>
+                        <span class="label">Light 微糖</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">0%</span>
+                        <span class="label">None 無糖</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="chart-column">
-                    <h4>ICE LEVEL <span class="zh">冰量</span></h4>
-                    <div class="level-bar">
-                        <div class="level-item">
-                            <span class="percent">Normal</span>
-                            <span class="label">正常</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">Less</span>
-                            <span class="label">少冰</span>
-                        </div>
-                        <div class="level-item">
-                            <span class="percent">None</span>
-                            <span class="label">去冰</span>
-                        </div>
-                        <div class="level-item hot-option">
-                            <span class="percent">HOT</span>
-                            <span class="label">熱飲</span>
-                        </div>
+            <div class="chart-column">
+                <h4>ICE LEVEL <span class="zh">冰量</span></h4>
+                <div class="level-bar">
+                    <div class="level-item">
+                        <span class="percent">Normal</span>
+                        <span class="label">正常</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">Less</span>
+                        <span class="label">少冰</span>
+                    </div>
+                    <div class="level-item">
+                        <span class="percent">None</span>
+                        <span class="label">去冰</span>
+                    </div>
+                    <div class="level-item hot-option">
+                        <span class="percent">HOT</span>
+                        <span class="label">熱飲</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </div>

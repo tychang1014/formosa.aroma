@@ -187,3 +187,22 @@ function openSubTab(evt, storeId, btnId, targetSectionId) {
         }, 200); 
     }
 }
+
+function openTabAndScroll(tabId, sectionId) {
+  // 1. 先隱藏全部 tab
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.style.display = 'none';
+  });
+
+  // 2. 顯示選中的 tab
+  const activeTab = document.getElementById(tabId);
+  activeTab.style.display = 'block';
+
+  // 3. 等 DOM 更新後 scroll
+  setTimeout(() => {
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, 50);
+}

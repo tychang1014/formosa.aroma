@@ -30,7 +30,7 @@ nav {
     height: 90px;
     background-color: rgba(17, 22, 33, 0.95);
     backdrop-filter: blur(5px);
-    z-index: 1000;
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -397,6 +397,8 @@ nav {
 .section-title {
     color: var(--hover-glow);
     text-align: center;
+    scroll-margin-top: 100px; /* 你的header高度 */
+    margin-top: 25px;
     margin-bottom: 20px;
     font-size: 1.8rem;
     border-left: 4px solid var(--secondary-yellow);
