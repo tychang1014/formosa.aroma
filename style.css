@@ -1036,7 +1036,8 @@ header p {
     }   
 
     .section-title {
-        margin-left: 95px;
+        margin-left: 40px;
+        font-size: 1.3rem;
     }
     .section-subtitle {
         margin-left: 95px;
