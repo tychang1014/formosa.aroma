@@ -75,6 +75,15 @@ const translations = {
         about_desc2: "With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we invite you to craft your own flavor journey, where tradition meets creativity in every sip.",
         location_title: "Store Location",
         address: "Address: ",
+        teaspresso: "Teaspresso",
+        nitro_cold_brew: "Nitro Cold Brew",
+        sparkling_tea: "Sparkling Tea",
+        milk_tea: "Milk Tea",
+        cream_foam: "Cream Foam",
+        fruit-tea: "Fruit Tea",
+        yogurt: "Yogurt",
+        typhoon: "Typhoon",
+        specialty: "Specialty"
     },
     zh: {
         main: "首頁",
@@ -94,7 +103,16 @@ const translations = {
         about_desc2: "我們提供超過 20 種可客製化配料選擇，為顧客打造獨一無二的個人化品茶體驗。憑藉對品質與創新的堅持，Formosa Aroma 在市場中持續建立良好的口碑。我們誠摯的邀請您來打造屬於您的專屬風味，讓每一口都能喝到台灣的細緻與創新。",
         location_title: "門市位置",
         address: "地址：",
-      }
+        teaspresso: "島嶼純萃茶",
+        nitro_cold_brew: "島嶼冷萃",
+        sparkling_tea: "島嶼氣泡茶",
+        milk_tea: "島嶼奶香",
+        cream_foam: "島嶼奶蓋",
+        fruit_tea: "島嶼果香",
+        yogurt: "島嶼多多",
+        typhoon: "島嶼颱風",
+        specialty: "島嶼特調"
+      };
 };
 
 // 2. 切換語言函式
@@ -182,27 +200,47 @@ function openSubTab(evt, storeId, btnId, targetSectionId) {
         setTimeout(() => {
             const target = document.getElementById(targetSectionId);
             if (target) {
-                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                const yOffset = -100; // 你的 navbar 高度
+                const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+                window.scrollTo({
+                top: y,
+                behavior: 'smooth'
+                });
             }
         }, 200); 
     }
 }
 
-function openTabAndScroll(tabId, sectionId) {
-  // 1. 先隱藏全部 tab
+function openTabAndScroll(tabId, sectionId, btnId) {
+  // 1. 關掉所有 tab
   document.querySelectorAll('.tab-content').forEach(tab => {
     tab.style.display = 'none';
   });
 
-  // 2. 顯示選中的 tab
+  // 2. 打開選中的 tab
   const activeTab = document.getElementById(tabId);
   activeTab.style.display = 'block';
 
-  // 3. 等 DOM 更新後 scroll
+  // 3. 移除所有 button active
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // 4. 讓對應 button 亮起來
+  const activeBtn = document.getElementById(btnId);
+  if (activeBtn) {
+    activeBtn.classList.add('active');
+  }
+
+  // 5. scroll 到指定位置
   setTimeout(() => {
     const target = document.getElementById(sectionId);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
-  }, 50);
+  }, 200);
 }
