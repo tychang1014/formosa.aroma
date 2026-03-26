@@ -80,7 +80,7 @@ const translations = {
         sparkling_tea: "Sparkling Tea",
         milk_tea: "Milk Tea",
         cream_foam: "Cream Foam",
-        fruit-tea: "Fruit Tea",
+        fruit_tea: "Fruit Tea",
         yogurt: "Yogurt",
         typhoon: "Typhoon",
         specialty: "Specialty"
@@ -112,7 +112,7 @@ const translations = {
         yogurt: "島嶼多多",
         typhoon: "島嶼颱風",
         specialty: "島嶼特調"
-      };
+      }
 };
 
 // 2. 切換語言函式
