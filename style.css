@@ -896,6 +896,126 @@ header p {
     box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
 }
 
+/*---------------Career Page---------------*/
+.job-page-container {
+    max-width: 850px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+    background-color: var(--primary-blue);
+}
+
+.job-hiring-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+.job-main-title {
+    color: var(--text-gold);
+    padding-left: 20px;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.job-main-title span {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--body-text);
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+/* 聯絡資訊框 */
+.job-contact-box {
+    background: rgba(149, 100, 36, 0.1);
+    border: 1px dashed var(--secondary-yellow);
+    padding: 20px;
+    color: var(--text-gold);
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.job-email-link {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* 地點分類標題 */
+.job-location-title {
+    color: var(--hover-glow);
+    border-left: 5px solid var(--secondary-yellow);
+    font-size: 1.6rem;
+    margin: 45px 0 15px 0;
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+/* 職位卡片 */
+.job-item-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.job-item-card:hover {
+    border-color: var(--hover-glow);
+    box-shadow: 0 0 15px rgba(255, 238, 187, 0.15);
+}
+
+.job-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+}
+
+.job-item-title {
+    color: var(--text-gold);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.job-expand-icon {
+    color: var(--secondary-yellow);
+    font-size: 1.6rem;
+    transition: transform 0.3s ease;
+}
+
+/* 展開狀態 */
+.job-item-card.job-active .job-expand-icon {
+    transform: rotate(45deg);
+}
+
+.job-item-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.job-item-card.job-active .job-item-details {
+    max-height: 500px;
+}
+
+.job-details-content {
+    padding: 10px 30px 30px 30px;
+    border-top: 1px solid var(--border-color);
+    color: var(--body-text);
+}
+
+.job-details-content p {
+    margin: 12px 0;
+}
+
+.job-details-content strong {
+    color: var(--text-gold);
+    margin-right: 8px;
+}
+
 /* --- 響應式設計 (Mobile Fix) --- */
 @media (max-width: 1100px) {
     .menu-toggle {

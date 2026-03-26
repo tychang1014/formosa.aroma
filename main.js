@@ -83,7 +83,11 @@ const translations = {
         fruit_tea: "Fruit Tea",
         yogurt: "Yogurt",
         typhoon: "Typhoon",
-        specialty: "Specialty"
+        specialty: "Specialty",
+        alhambra_menu: "Alhambra Menu",
+        temple_city_menu: "Temple City Menu",
+        san_jose_menu: "San Jose Menu",
+        craft_own: "Craft Your Own Drink"
     },
     zh: {
         main: "首頁",
@@ -92,7 +96,7 @@ const translations = {
         whatsnew: "新品介紹",
         tealeave: "島嶼精選茶",
         menu: "飲品菜單",
-        catering: "飲品服務",
+        catering: "飲品承包服務",
         store: "門市位置",
         join: "加入我們",
         job: "工作機會",
@@ -111,7 +115,11 @@ const translations = {
         fruit_tea: "島嶼果香",
         yogurt: "島嶼多多",
         typhoon: "島嶼颱風",
-        specialty: "島嶼特調"
+        specialty: "島嶼特調",
+        alhambra_menu: "Alhambra 門市菜單",
+        temple_city_menu: "Temple City 門市菜單",
+        san_jose_menu: "San Jose 門市菜單",
+        craft_own: "客製化飲品"
       }
 };
 
@@ -243,4 +251,18 @@ function openTabAndScroll(tabId, sectionId, btnId) {
       });
     }
   }, 200);
+}
+
+function toggleJobDetails(cardElement) {
+    // 切換特定的 class 名稱以觸發展開效果
+    cardElement.classList.toggle('job-active');
+    
+    // 如果你想讓使用者點開一個時，另一個自動收合，可以取消下面這段的註解
+    /*
+    document.querySelectorAll('.job-item-card').forEach(otherCard => {
+        if (otherCard !== cardElement) {
+            otherCard.classList.remove('job-active');
+        }
+    });
+    */
 }

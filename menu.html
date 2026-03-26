@@ -6,7 +6,7 @@
     
     <div class="tabs-container">
         <div class="menu-dropdown">
-            <button id="alhambra-btn" class="tab-btn" onclick="openTab(event, 'alhambra')">Alhambra Menu </button>
+            <button id="alhambra-btn" data-key="alhambra_menu" class="tab-btn" onclick="openTab(event, 'alhambra')">Alhambra Menu </button>
             <div class="menu-dropdown-content">
                 <a href="#" data-key="teaspresso" onclick="openTabAndScroll('alhambra', 'al-teaspresso', 'alhambra-btn')">Teaspresso</a>
                 <a href="#" data-key="milk_tea" onclick="openTabAndScroll('alhambra', 'al-milktea', 'alhambra-btn')">Milk Tea</a>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="menu-dropdown">
-            <button id="temple-city-btn" class="tab-btn" onclick="openTab(event, 'temple-city')">Temple City Menu </button>
+            <button id="temple-city-btn" data-key="temple_city_menu" class="tab-btn" onclick="openTab(event, 'temple-city')">Temple City Menu </button>
             <div class="menu-dropdown-content">
                 <a href="#" data-key="teaspresso" onclick="openTabAndScroll('temple-city', 'tc-teaspresso', 'temple-city-btn')">Teaspresso</a>
                 <a href="#" data-key="nitro_cold_brew" onclick="openTabAndScroll('temple-city', 'tc-coldbrew', 'temple-city-btn')">Nitro Cold Brew</a>
@@ -31,7 +31,7 @@
                 </div>
         </div>
         <div class="menu-dropdown">
-            <button id="san-jose-btn" class="tab-btn" onclick="openTab(event, 'san-jose')">San Jose Menu </button>
+            <button id="san-jose-btn" data-key="san_jose_menu" class="tab-btn" onclick="openTab(event, 'san-jose')">San Jose Menu </button>
             <div class="menu-dropdown-content">
                 <a href="#" data-key="teaspresso" onclick="openTabAndScroll('san-jose', 'sj-teaspresso', 'san-jose-btn')">Teaspresso</a>
                 <a href="#" data-key="nitro_cold_brew" onclick="openTabAndScroll('san-jose', 'sj-coldbrew', 'san-jose-btn')">Nitro Cold Brew</a>
@@ -42,7 +42,7 @@
                 <a href="#" data-key="specialty" onclick="openTabAndScroll('san-jose', 'sj-specialty', 'san-jose-btn')">Specialty</a>
             </div>
         </div>
-        <button class="tab-btn special-tab" onclick="openTab(event, 'craft-own')">Craft Your Own Drink</button>
+        <button data-key="craft_own" class="tab-btn special-tab" onclick="openTab(event, 'craft-own')">Craft Your Own Drink</button>
     </div>
 
     <div id="alhambra" class="tab-content active-content">
@@ -1745,10 +1745,25 @@
                 <h3>Choose Your Tea Base</h3>
                 <span class="chinese-name">選擇茶底</span>
                 <ul class="detail-list">
-                    <li>Assam Black Tea (阿薩姆紅茶)</li>
-                    <li>Jasmine Green Tea (茉香綠茶)</li>
-                    <li>Four Season Oolong (四季春)</li>
-                    <li>Roasted Oolong (焙火烏龍)</li>
+                    <li>Jinxuan Mountain Tea  阿里山金萱</li>
+                    <li>Pouchong Green Tea  文山包種茶</li>
+                    <li>Jasmine Green Tea  茉香綠茶</li>
+                    <li>Biluochun Green Tea  三峽碧螺春</li>
+                    <li>Buckwheat Gyokuro Green Tea 蕎麥玉露</li>
+                    <li>Assam Black Tea  阿薩姆紅茶</li>
+                    <li>Dancing Crane Black Tea 舞鶴紅茶</li>
+                    <li>Cassia Seed Black Tea 決明子紅茶</li>
+                    <li>Noble Consort Black Tea 蜜香貴妃紅茶</li>
+                    <li>Earl Grey Black Tea 伯爵紅茶</li>
+                    <li>Golden Phoenix Oolong  金鳳烏龍</li>
+                    <li>Iron Buddha Oolong  鐵觀音</li>
+                    <li>Oriental Beauty Oolong  東方美人茶</li>
+                    <li>Frozen Summit Oolong  凍頂烏龍茶</li>
+                    <li>Luye Red Oolong  鹿野紅烏龍茶</li>
+                    <li>Ember Oolong   焙火烏龍茶</li>
+                    <li>Chrysanthemum Pu Er  菊花普洱茶</li>
+                    <li>Genmai Buckwheat Tea  玄米蕎麥茶</li>
+                    <li>Rooibos Tea (Caffeine Free) 國寶茶(無咖啡因)</li>
                 </ul>
             </div>
         </div>
@@ -1760,11 +1775,32 @@
                 <span class="chinese-name">選擇加料 (+$0.75)</span>
                 <div class="topping-tags">
                     <span>Boba 波霸</span>
-                    <span>Lychee Jelly 荔枝凍</span>
-                    <span>Grass Jelly 仙草</span>
                     <span>Crystal Boba 寒天</span>
-                    <span>Cheese Foam 芝士奶蓋</span>
-                    <span>Aloe Vera 蘆薈</span>
+                    <span>BARLEY BOBA 大麥晶球</span>
+                    <span>Chestnut boba 板栗晶球</span>
+                    <span>carAmel pudding 焦糖布丁</span>
+                    <span>hojicha pudding 培茶布丁</span>
+                    <span>uji matcha panna cotta 宇治抹茶奶凍</span>
+                    <span>LYCHEE JELLY 椰果</span>
+                    <span>Osmanthus Jelly 桂花凍</span>
+                    <span>cassia seed black tea jelly 決明子紅茶凍</span>
+                    <span>Miyazaki Yuzu jelly 宮崎香柚凍</span>
+                    <span>Tapioca Sago 西米</span>
+                    <span>Black Sweet Rice 黑糯米</span>
+                    <span>ALOE VERA 蘆薈</span>
+                    <span>RED BEAN 紅豆</span>
+                    <span>BASIL SEED 山粉圓</span>
+                    <span>milky rice mochi 奶香米麻糬</span>
+                    <span>Sea salt cheese foam 海鹽芝士奶蓋</span>
+                    <span>shio koji cream foam 鹽麴奶蓋</span>
+                    <span>maple crumble cream foam 楓糖脆片奶蓋</span>
+                    <span>pistachio cream foam 開心果奶蓋</span>
+                    <span>tiramisu cream foam 提拉米蘇奶蓋</span>
+                    <span>honey oat foam (non-dairy) 蜂蜜燕麥奶蓋</span>
+                    <span>sakura snow whip 櫻花雪頂</span>
+                    <span>Taro Ball Trifecta (+$1.25) 三色小芋圓</span>
+                    <span>UBE TARO PUREE (+$1.25) 紫薯芋泥</span>
+                    <span>Crème Brûlée (+$1.25) 焦糖布雷奶蓋</span>
                 </div>
             </div>
         </div>
