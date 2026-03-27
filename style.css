@@ -915,7 +915,7 @@ header p {
     color: var(--text-gold);
     padding-left: 20px;
     font-size: 2.5rem;
-    letter-spacing: 2px;
+    letter-spacing: 5px;
     margin-bottom: 25px;
 }
 
@@ -1014,6 +1014,167 @@ header p {
 .job-details-content strong {
     color: var(--text-gold);
     margin-right: 8px;
+}
+
+/*---------------Franchise Page---------------*/
+.franchise-main-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--primary-blue);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.franchise-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.franchise-title {
+    color: var(--text-gold);
+    font-size: 2.5rem;
+    padding-left: 20px;
+    letter-spacing: 5px;
+    margin: 0;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
+.franchise-title span {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--body-text);
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.franchise-subtitle {
+    color: var(--text-gold);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+/* Timeline Style */
+.franchise-timeline {
+    border-left: 1px solid var(--border-color);
+    margin-left: 20px;
+    padding-left: 30px;
+    margin-bottom: 60px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: var(--secondary-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--hover-glow);
+}
+
+.timeline-item .year {
+    color: var(--text-gold);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.timeline-item p {
+    margin: 5px 0 0 0;
+    color: var(--body-text);
+}
+
+/* Philosophy & CTA */
+.franchise-description {
+    line-height: 1.8;
+    color: var(--body-text);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.franchise-cta-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--secondary-yellow);
+    padding: 40px;
+    text-align: center;
+}
+
+.franchise-cta-box h3 {
+    color: var(--text-gold);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.franchise-contact-info {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: var(--hover-glow);
+}
+
+.franchise-contact-info a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.franchise-content-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+.franchise-text-side {
+    flex: 1;
+}
+
+.franchise-image-side {
+    flex: 1;
+}
+
+.franchise-featured-img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-color);
+    box-shadow: 10px 10px 0px var(--secondary-yellow); /* 增加設計感的陰影 */
+}
+
+/* Gallery Grid 排版 */
+.franchise-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.gallery-item {
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 強制圖片成正方形 */
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    border-color: var(--hover-glow);
+}
+
+.gallery-item p {
+    color: var(--text-gold);
+    margin-top: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
 /* --- 響應式設計 (Mobile Fix) --- */
@@ -1176,6 +1337,14 @@ header p {
     .content-box { width: 100%; margin-top: 40px; }
     .tea-title::after { left: 50%; transform: translateX(-50%); }
     .tea-img { max-width: 300px; }
+
+    /* Franchise */
+    .franchise-content-wrapper {
+        flex-direction: column;
+    }
+    .franchise-gallery {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 這個高度要等於你 nav 的 height */
