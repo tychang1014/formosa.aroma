@@ -21,6 +21,9 @@ function loadPage(page, targetId = null) {
       if (page.includes("tea")) {
         initTeaPage();
       }
+      if (page.includes("feature")) {
+        initCarousel();
+      }
 
       if (targetId) {
         setTimeout(() => {
@@ -265,4 +268,94 @@ function toggleJobDetails(cardElement) {
         }
     });
     */
+}
+
+const drinkList = [
+        { en: "Golden Oolong Teaspresso", zh: "黃金萃取烏龍", desc: "嚴選台灣高山烏龍，琥珀色清澈茶湯與細緻蘭花香。", img: "https://resource.iyp.tw/static.iyp.tw/14491/files/743956ed-c3cc-479e-b0ed-8b02642d0c27.jpg", isRec: true, isNew: false },
+        { en: "Brown Sugar Boba Milk", zh: "黑糖珍珠鮮奶", desc: "慢火熬煮黑糖珍珠，搭配純淨鮮乳，香濃醇厚。", img: "https://www.sunnysyrup.com/proimages/recipe/popular-drink/17%20Brown%20Sugar%20Pearls%20Milk.jpg", isRec: true, isNew: true },
+        { en: "Ruby Grapefruit Green Tea", zh: "紅柚翡翠", desc: "新鮮紅柚果肉，完美融入清爽綠茶基底。", img: "https://v3-statics.mirrormedia.mg/images/20220607154624-860d70f55845fe579e1683c2ea1ca5c2.png", isRec: false, isNew: true },
+        { en: "Uji Matcha Latte", zh: "宇治抹茶歐蕾", desc: "日本宇治抹茶粉，結合絲滑鮮乳，呈現極致口感。", img: "https://kyo-chikiriya.shop/cdn/shop/files/Cappuccino_latte_uji_matcha2.jpg?v=1769654485&width=600", isRec: true, isNew: false },
+        { en: "Passionfruit Lychee Tea", zh: "百香荔枝果茶", desc: "酸甜百香果遇上清甜荔枝，果肉層次分明。", img: "https://p8.itc.cn/images01/20210226/cd5b847ad2f6442ca7c0a61226e2b528.jpeg", isRec: false, isNew: false }
+    ];
+
+let currentIdx = 0;
+let domItems = [];
+let autoPlay;
+
+function initCarousel() {
+    const stage = document.getElementById('carousel-stage');
+    
+    // 【關鍵 1】安全性檢查：如果畫面上找不到這個 ID，直接退出，不跑後面的程式碼
+    if (!stage) return; 
+
+    // 【關鍵 2】重置資料：避免切換頁面後，舊的圖片資料還殘留在陣列裡
+    stage.innerHTML = ''; 
+    domItems = []; 
+    currentIdx = 0;
+
+    // 開始生成內容
+    drinkList.forEach((drink, i) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        
+        // 這裡放你原本生成 item 的 innerHTML 內容...
+        // item.innerHTML = `...`;
+        item.style.backgroundImage = `url('${drink.img}')`;
+
+        stage.appendChild(item);
+        domItems.push(item);
+    });
+
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const len = domItems.length;
+    
+    domItems.forEach((item, i) => {
+        let offset = i - currentIdx;
+        
+        // 無限輪播數學運算
+        if (offset < -Math.floor(len / 2)) offset += len;
+        if (offset > Math.floor(len / 2)) offset -= len;
+
+        item.className = 'carousel-item';
+
+        if (offset === 0) item.classList.add('pos-center');
+        else if (offset === -1) item.classList.add('pos-left');
+        else if (offset === 1) item.classList.add('pos-right');
+        else if (offset < 0) item.classList.add('pos-hidden-left');
+        else item.classList.add('pos-hidden-right');
+    });
+
+    updateText();
+}
+
+function navigateProduct(direction) {
+    currentIdx = (currentIdx + direction + domItems.length) % domItems.length;
+    updateCarousel();
+    resetAutoPlay();
+}
+
+function updateText() {
+    const cur = drinkList[currentIdx];
+    const textPanel = document.getElementById('text-panel');
+
+    textPanel.classList.add('is-switching');
+    
+    setTimeout(() => {
+        document.getElementById('txt-en').innerText = cur.en;
+        document.getElementById('txt-zh').innerText = cur.zh;
+        document.getElementById('txt-desc').innerText = cur.desc;
+        textPanel.classList.remove('is-switching');
+    }, 300);
+}
+
+function startAutoPlay() {
+    autoPlay = setInterval(() => { navigateProduct(1); }, 4000);
+}
+
+function resetAutoPlay() {
+    clearInterval(autoPlay);
+    startAutoPlay();
 }
