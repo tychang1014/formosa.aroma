@@ -10,6 +10,11 @@
     --seal-red: #7a1616; 
     --seal-red-border: #9e2a2a;
     --border-color: rgba(255,255,255,0.2);
+    --card-bg: #1a2130;
+
+    --font-main: 'Montserrat', sans-serif;
+    --aspect-ratio-4-3: calc(4 / 3);
+    --aspect-ratio-widescreen: calc(16 / 9); /* 你可以根據喜好改為 16/9 或 21/9 */
 }
 
 * {
@@ -189,10 +194,11 @@ nav {
     transform: translate(-50%, -50%);
     min-width: 100%;
     min-height: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
     z-index: -1;
     opacity: 0.8;
+    object-fit: cover;
 }
 
 .hero-content {
@@ -207,94 +213,382 @@ nav {
     color: white;
 }
 
-.signature-section {
-    padding: 100px 10%;
-    background-color: var(--primary-blue);
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* --- 3. 交錯區塊系統 (Grid Sections) --- */
+.main-grid-section {
+    padding: 80px 0;
+}
+
+.main-grid {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 50px;
+    gap: 60px;
+    margin-bottom: 40px;
 }
 
-.product-image {
+/* 交錯反轉 */
+.main-reverse {
+    flex-direction: row-reverse;
+}
+
+.main-info {
     flex: 1;
-    min-width: 300px;
-    max-width: 500px;
-    border: 2px solid var(--secondary-yellow);
-    padding: 10px;
-    box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
-.product-image img {
+.main-visual {
+    flex: 1.2;
+    position: relative;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* 比例控制 */
+.main-ratio-4-3 { aspect-ratio: 4 / 3; }
+.main-ratio-widescreen { aspect-ratio: 21 / 9; }
+
+.main-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
+    transition: transform 1s ease;
 }
 
-.product-text {
-    flex: 1;
-    min-width: 300px;
+.main-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(17,22,33,0.7) 0%, rgba(149,100,36,0.1) 100%);
+    pointer-events: none;
 }
 
-.product-text h2 {
-    font-size: 2.5rem;
+/* --- 4. 文字裝飾 (Typography) --- */
+.main-index {
+    display: block;
+    font-size: 4rem;
+    font-family: serif;
+    font-style: italic;
+    color: rgba(207, 170, 104, 0.1);
+    margin-bottom: -20px;
+    margin-left: -10px;
+}
+
+.main-heading {
+    color: var(--text-gold);
+    font-size: 2.2rem;
+    font-weight: 300;
     margin-bottom: 20px;
-    color: var(--hover-glow);
-    border-bottom: 1px solid var(--secondary-yellow);
+    letter-spacing: 2px;
+}
+
+.main-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 35px;
+    color: var(--body-text);
+}
+
+/* --- 5. 產品滑動區塊 (Product Scroller) --- */
+.main-products-section {
+    padding: 100px 0;
+}
+
+.main-product-scroller {
+    display: flex;
+    gap: 30px;
+    overflow-x: hidden;
+    padding: 20px 0 60px 0;
+    
+    /* 核心鎖定：防止選取文字與拖曳圖片 */
+    user-select: none;           /* 禁止選取文字 */
+    -webkit-user-drag: none;     /* 禁止系統預設拖曳圖片 */
+    -webkit-tap-highlight-color: transparent; /* 移除手機點擊高亮 */
+    
+    /* 物理效果優化 */
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    cursor: grab;
+    
+    /* 強制開啟硬體加速 (GPU) */
+    transform: translateZ(0);
+    will-change: scroll-left;
+    touch-action: none;    /* 完全接管觸控 */
+}
+
+.main-product-scroller:active {
+    cursor: grabbing;
+}
+
+.product-item {
+    flex: 0 0 350px;
+    aspect-ratio: 4 / 5;
+    border-radius: 20px;
+    overflow: hidden;
+    
+    /* 核心：設定吸附點在中間 */
+    scroll-snap-align: center;
+    
+    /* 增加過渡動畫，讓縮放更順 */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.product-item img {
+    pointer-events: none; /* 讓滑鼠事件穿透圖片，直接由容器捕捉 */
+    -webkit-user-drag: none;
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 捲動條視覺 (Bar) */
+.scroller-bar-container {
+    width: 200px;
+    height: 2px;
+    background: rgba(207, 170, 104, 0.1);
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden; /* 確保內部滑塊不溢出 */
+}
+
+.scroller-bar {
+    width: 30%; /* 滑塊寬度 */
+    height: 100%;
+    background: var(--text-gold);
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform;
+    /* 讓條狀位移也帶有一點點緩衝感 */
+    transition: transform 0.1s linear; 
+}
+
+/* --- 6. 按鈕樣式 (Buttons) --- */
+.main-cta-btn {
     display: inline-block;
-    padding-bottom: 10px;
+    padding: 12px 30px;
+    border: 1px solid var(--text-gold);
+    border-radius: 50px;
+    color: var(--text-gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
 }
 
-.product-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 20px;
+.main-cta-btn:hover {
+    background-color: var(--text-gold);
+    color: var(--primary-blue);
+    box-shadow: 0 0 20px var(--hover-glow);
+}
+
+/* --- 7. 導覽底座 (Footer Nav) --- */
+.main-footer-nav {
+    background-color: var(--card-bg);
+    padding: 80px 0;
+    margin-top: 100px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+}
+
+.footer-col h4 {
+    color: var(--text-gold);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.footer-col a {
+    display: block;
+    color: var(--body-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.footer-col a:hover {
+    color: var(--text-gold);
+    padding-left: 5px;
 }
 
 /* ---------- About Section ---------- */
-.about1-section {
-    background-color: var(--primary-blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.about2-section {
-    padding: 10px 10%;
-    background-color: var(--primary-blue);
-    color: var(--text-gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.about-image img {
-    width:80%;
-    max-width: 1000px;
-    padding-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-.about-product-text {
-    flex: 1;
-    min-width: 300px;
+.about-container {
+    max-width: 1300px; /* 稍微加大容器，適配橫幅圖 */
+    margin: 0 auto;
+    padding: 100px 20px;
 }
 
-.about-product-text h2 {
-    font-size: 2.5rem;
-    color: var(--hover-glow);
+/* 標頭設定 (保留) */
+.about-header {
     text-align: center;
+    margin-bottom: 120px;
 }
 
-.about-product-text p {
-    text-indent: 50px;
-    font-size: 1.3rem;
-    line-height: 1.8;
-    text-align: justify;
-    padding-bottom: 10px;
+.about-subtitle {
+    color: var(--secondary-yellow);
+    letter-spacing: 0.3em;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.about-title {
+    color: var(--text-gold);
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 15px rgba(207, 170, 104, 0.3);
+}
+
+.about-header-line {
+    width: 60px;
+    height: 1px;
+    background-color: var(--secondary-yellow);
+    margin: 20px auto 0;
+}
+
+/* =========================================
+   佈局邏輯 (排版修改)
+   ========================================= */
+.about-block {
+    display: flex;
+    align-items: center; /* 圖片垂直置中 */
+    justify-content: space-between;
+    margin-bottom: 160px; /* 區塊間距稍微加大 */
+    gap: 70px; /* 圖片與文字的距離 */
+}
+
+/* 移除原本的 about-reverse，現在兩塊統一左圖右文 */
+/* .about-reverse {
+    flex-direction: row-reverse;
+} */
+
+.about-text-wrapper {
+    flex: 1;
+    max-width: 550px; /* 稍微加大文字寬度，適配橫幅圖 */
+}
+
+.about-block-heading {
+    color: var(--text-gold);
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.about-block-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 45px;
+    height: 2px;
+    background-color: var(--secondary-yellow);
+}
+
+.about-paragraph {
+    margin-bottom: 25px;
+    font-weight: 300;
+}
+
+/* =========================================
+   圖片設定 (比例控制與 Chic 風格保留)
+   ========================================= */
+.about-image-wrapper {
+    flex: 1; /* 圖片容器會佔用剩餘空間，但我們會限制其比例 */
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); /* 加強陰影，更有 Chic 感 */
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    background-color: var(--card-bg);
+}
+
+/* 比例控制 Class (關鍵修改) */
+.about-ratio-4-3 {
+    width: 100%;
+    aspect-ratio: var(--aspect-ratio-4-3); /* 強制 4:3 */
+}
+
+.about-ratio-widescreen {
+    width: 100%;
+    aspect-ratio: var(--aspect-ratio-widescreen); /* 強制超寬橫幅 */
+}
+
+.about-image {
+    width: 100%;
+    height: 100%; /* 填滿容器，搭配 aspect-ratio 和 object-fit */
+    object-fit: cover; /* 裁切並置中圖片 */
+    display: block;
+    transition: transform 1.2s cubic-bezier(0.25, 0.1, 0.25, 1); /* 平滑 hover 動畫 */
+}
+
+.about-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(17, 22, 33, 0.85) 0%, rgba(149, 100, 36, 0.15) 100%);
+    pointer-events: none;
+}
+
+.about-image-wrapper:hover .about-image {
+    transform: scale(1.08); /* 滑過時稍微放大，增加細節感 */
+}
+
+/* 按鈕與 Hover 發光 (保留) */
+.about-cta-button {
+    display: inline-block;
+    padding: 14px 35px;
+    border: 1px solid var(--text-gold);
+    color: var(--text-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 0.4s ease;
+    margin-top: 15px;
+}
+
+.about-cta-button:hover {
+    background-color: var(--text-gold);
+    color: var(--primary-blue);
+    box-shadow: 0 0 25px var(--hover-glow);
+}
+
+.about-reverse {
+    flex-direction: row-reverse;
+}
+
+/* 當文字在左邊時 (about-reverse 狀態) */
+.about-reverse .about-text-wrapper {
+    /* 如果你希望文字在左邊時是靠右對齊，可以取消註解下面這行 */
+    text-align: right;
+}
+
+/* 反轉狀態下，標題的裝飾線維持在左邊或是跟著對齊 */
+.about-reverse .about-block-heading::after {
+    left: 0; /* 維持在左邊比較符合 Modern 簡潔感 */
 }
 
 /* ---------- Feature Section ---------- */
@@ -358,8 +652,10 @@ nav {
 /* 確保每個圖片品項有給予寬高與背景設定 */
 .carousel-item {
     position: absolute;
-    width: 300px;  /* 根據你的設計調整 */
-    height: 300px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 300px;
+    max-height: 300px;
     background-size: cover; /* 或是 cover */
     background-repeat: no-repeat;
     background-position: center;
@@ -425,10 +721,16 @@ nav {
 
 /* 按鈕與文字區 */
 .nav-arrow-btn {
-    background: none; border: 1px solid var(--secondary-yellow);
-    color: var(--text-gold); font-size: 1.5rem;
-    width: 55px; height: 55px; border-radius: 50%;
-    cursor: pointer; transition: 0.3s; z-index: 5;
+    background: none; 
+    border: 1px solid var(--secondary-yellow);
+    color: var(--text-gold); 
+    font-size: 1.5rem;
+    width: 55px; height: 55px; 
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    cursor: pointer; 
+    transition: 0.3s; 
+    z-index: 5;
 }
 .nav-arrow-btn:hover { background: var(--secondary-yellow); color: var(--primary-blue); }
 
@@ -994,7 +1296,188 @@ header p {
     flex-wrap: wrap;
 }
 
-/*------- Location Section --- */
+/*------- Catering Section ------- */
+.catering-header-bar {
+    text-align: center;
+    padding: 60px 20px 30px;
+}
+
+.catering-header-bar h1 {
+    color: var(--text-gold);
+    letter-spacing: 3px;
+}
+
+.catering-header-bar p {
+    color: var(--body-text);
+    margin-top: 5px;
+}
+
+.catering-header-line {
+    margin: 25px auto 0;
+    width: 80%;
+    height: 2px;
+    background: var(--secondary-yellow);
+}
+
+/* HERO */
+.catering-hero {
+    height: 70vh;
+    background: url('https://images.unsplash.com/photo-1544148103-0773bf10d330') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.catering-hero-overlay {
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.catering-title {
+    font-size: 2.5rem;
+    color: var(--text-gold);
+}
+
+.catering-subtitle {
+    color: var(--body-text);
+}
+
+.catering-cta {
+    margin-top: 20px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: 1px solid var(--secondary-yellow);
+    background: transparent;
+    color: var(--text-gold);
+    cursor: pointer;
+}
+
+.catering-cta:hover {
+    background: var(--secondary-yellow);
+    color: var(--primary-blue);
+}
+
+/* SECTION */
+.catering-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.catering-header {
+    color: var(--text-gold);
+    margin-bottom: 50px;
+}
+
+/* GRID -> 2 per row */
+.catering-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* CARD BIGGER + MODERN */
+.catering-card {
+    position: relative;
+    border-radius: 20px; /* 現代感圓角 */
+    overflow: hidden;
+    height: 380px; /* 統一高度 */
+    background-color: var(--primary-blue); /* 基礎背景色 */
+    
+    /* 核心：加粗的暗金色邊框 */
+    border: 2px solid var(--secondary-yellow); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 基礎陰影 */
+    
+    /* 動畫過渡 */
+    transition: all 0.4s ease;
+}
+
+/* 懸停效果：卡片上浮、邊框亮金、金色光暈 */
+.catering-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--text-gold);
+    box-shadow: 0 15px 40px rgba(17, 22, 33, 0.7), 0 0 20px rgba(207, 170, 104, 0.3); 
+}
+
+/* 圖片設定 */
+.catering-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease; /* 圖片放大動畫 */
+}
+
+/* 懸停時圖片微微放大 */
+.catering-card:hover img {
+    transform: scale(1.05);
+}
+
+/* 文字與毛玻璃區塊優化 (核心修正) --- */
+.catering-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* 增加 padding，將文字推到底部 */
+    padding: 40px; 
+    text-align: left;
+    z-index: 2; /* 確保文字在最上層 */
+}
+
+/* 核心魔法：用偽元素做漸層淡出的毛玻璃背景 */
+.catering-card-content::before {
+    content: '';
+    position: absolute;
+    /* 讓偽元素墊在文字下面 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; 
+    
+    /* 1. 溫和的深藍色漸層背景：在頂部保留色調，有助於過渡 */
+    background: linear-gradient(to top, rgba(17, 22, 33, 0.95) 0%, rgba(17, 22, 33, 0.5) 50%, rgba(17, 22, 33, 0.1) 100%);
+    
+    /* 2. 毛玻璃效果 (調高到 12px 更有高級感) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* 3. 終極魔法：多點絲滑漸層遮罩！ */
+    /* 底部完全實心，30% 高度處保持 90%，70% 高度處降至 40%，頂部完全透明。 */
+    /* 這消滅了單個硬邊點，創造了一個連續的淡出效果。 */
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.1) 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.1) 100%);
+}
+
+.catering-card h3 {
+    color: var(--text-gold);
+    margin: 0 0 10px;
+    font-size: 1.6rem; /* 略微放大標題 */
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+}
+
+.catering-card p {
+    color: var(--body-text);
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* CTA */
+.catering-cta-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.catering-cta-section h2 {
+    color: var(--text-gold);
+}
+
+/*------- Location Section ------- */
 .location-section {
     background-color: var(--primary-blue);
     align-items: center;
@@ -1385,6 +1868,25 @@ header p {
         color: #aaa; /* 稍微暗一點以示區別 */
         font-size: 1.2rem;
     }
+    /* Main Content */
+    .main-grid, .main-reverse {
+        flex-direction: column; /* 統一改為垂直 */
+        text-align: center;
+        gap: 40px;
+    }
+
+    .main-visual {
+        width: 100%;
+    }
+
+    .main-heading {
+        font-size: 1.8rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: center;
+    }
 
     /* Menu Section */
     .tabs-container {
@@ -1469,6 +1971,43 @@ header p {
         margin-bottom: 30px;
     }
 
+    /* About */
+    .about-container {
+        padding: 60px 20px;
+    }
+
+    .about-header {
+        margin-bottom: 70px;
+    }
+
+    .about-title {
+        font-size: 2.2rem;
+    }
+
+    .about-block {
+        flex-direction: column-reverse; /* 手機版統一文字在下，圖片在上 */
+        text-align: center;
+        margin-bottom: 100px;
+        gap: 40px;
+    }
+
+    .about-text-wrapper {
+        max-width: 100%;
+    }
+
+    .about-block-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* 手機版可能不需要這麼寬的橫幅 */
+    .about-ratio-widescreen {
+        aspect-ratio: 16/9; 
+    }
+    .about-reverse {
+        flex-direction: column-reverse; /* 手機版文字在下，圖片在上 */
+    }
+
     /* Tea */
     .nav-item:hover .dropdown {
         display: block;
@@ -1487,6 +2026,16 @@ header p {
         flex-direction: column;
     }
     .franchise-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    /* Carousel */
+    .carousel-item.pos-center {
+        transform: translateX(0) scale(1);
+    }
+
+    /* Catering */
+    .catering-grid {
         grid-template-columns: 1fr;
     }
 }

@@ -359,3 +359,100 @@ function resetAutoPlay() {
     clearInterval(autoPlay);
     startAutoPlay();
 }
+
+function scrollToSection() {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+}
+
+const slider = document.querySelector('.main-product-scroller');
+const scrollBar = document.querySelector('.scroller-bar');
+
+let isDown = false;
+let startX;
+let scrollLeft;
+let velocity = 0;
+let rafID;
+
+// --- 核心物理參數 (調整這裡可以改變手感) ---
+let targetX = 0;      // 目標捲動位置
+let currentX = 0;     // 當前顯示位置
+const lerpFactor = 0.05; // 越小越輕、越軟 (建議 0.03 ~ 0.06)
+const dragSpeed = 2.0;   // 拖拽靈敏度
+// ---------------------------------------
+
+function updateProgressBar() {
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (maxScroll <= 0) return;
+    const scrollPercent = slider.scrollLeft / maxScroll;
+    
+    // 動態計算滑塊位移 (200 是容器寬，60 是滑塊寬)
+    const barTranslate = scrollPercent * (200 - 60);
+    scrollBar.style.transform = `translateX(${barTranslate}px)`;
+}
+
+function animate() {
+    // 核心物理公式：讓 current 慢慢追上 target
+    currentX += (targetX - currentX) * lerpFactor;
+    
+    // 更新實際捲動位置
+    slider.scrollLeft = currentX;
+    
+    // 更新 Bar
+    updateProgressBar();
+    
+    rafID = requestAnimationFrame(animate);
+}
+
+// 啟動動畫
+animate();
+
+slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.style.cursor = 'grabbing';
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    cancelAnimationFrame(rafID);
+    animate();
+});
+
+slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * dragSpeed;
+    
+    // 更新目標位置
+    targetX = scrollLeft - walk;
+    
+    // 限制邊界，防止拖過頭
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (targetX < 0) targetX = 0;
+    if (targetX > maxScroll) targetX = maxScroll;
+});
+
+slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.style.cursor = 'grab';
+});
+
+slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.style.cursor = 'grab';
+});
+
+// 讓滾輪也變得輕盈
+slider.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    
+    // 滾輪力度緩衝
+    targetX += e.deltaY * 0.8;
+    
+    if (targetX < 0) targetX = 0;
+    if (targetX > maxScroll) targetX = maxScroll;
+}, { passive: false });
+
+// 初始化
+targetX = slider.scrollLeft;
+currentX = slider.scrollLeft;

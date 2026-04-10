@@ -30,7 +30,7 @@
                         <li><a href="#" data-key="whatsnew" onclick="loadPage('feature.html')">What’s New</a></li>
                         <li><a href="#" data-key="tealeave" onclick="loadPage('intro.html')">Tea Selection</a></li>
                         <li><a href="#" data-key="menu" onclick="loadPage('menu.html')">Menu</a></li>
-                        <li><a href="#" data-key="catering">Catering Service</a></li>
+                        <li><a href="#" data-key="catering" onclick="loadPage('catering.html')">Catering Service</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -63,50 +63,108 @@
     <div id="content">
         <section class="hero-section">
             <video autoplay muted loop playsinline class="hero-video">
-                <source src="https://github.com/user-attachments/assets/4cc4aab6-8523-4bf6-b2a0-0b6124da4d99" type="video/mp4">
+                <source src="https://pub-57f37ac49af04dbda299f0795edb9ca8.r2.dev/output.mp4" type="video/mp4">
             </video>
             <div class="hero-content">
                 <h1 class="hero-title" style="font-weight: 200; text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); letter-spacing: 5px;">EST. 2023</h1>
                 <h1 class="hero-title" style="font-weight: 200; text-shadow: 0 0 10px rgba(212, 175, 55, 0.6); letter-spacing: 5px;">Los Angeles</h1>
             </div>
-        </section>
-
-        <section class="signature-section">
-            <div class="product-image">
-                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Signature Drink">
-            </div>
-            <div class="product-text">
-                <h2 data-key="signature_title">Signature Blue Milk Tea</h2>
-                <p data-key="signature_desc">
-                    Experience the depth of our exclusive tea blend, perfectly balanced with fresh organic milk. 
-                    Our signature drink captures the essence of the ocean with its unique hue and refreshing taste.
-                </p>
-            </div>
-        </section>
-
-    <section id="product" class="page">
-            <h1>Our Products</h1>
-            <p>這裡放產品列表、分類、圖片展示等。</p>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1.5rem; margin-top:2rem;">
-            <!-- 範例產品卡片 -->
-            <div style="background:#fff; padding:1rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-                <img src="https://via.placeholder.com/300x200?text=Product+1" alt="產品1" style="width:100%; border-radius:6px;">
-                <h3>產品名稱 A</h3>
-                <p>簡短描述...</p>
-            </div>
-            <!-- 更多產品... -->
+        </section>  
+        <section class="main-grid-section" data-aos="fade-up">
+            <div class="main-container main-grid">
+                <div class="main-visual main-ratio-4-3">
+                    <img src="https://images.unsplash.com/photo-1594631252845-29fc458695d7?q=80&w=800&auto=format&fit=crop" class="main-img" alt="Brand Story">
+                    <div class="main-overlay"></div>
+                </div>
+                <div class="main-info">
+                    <span class="main-index">01</span>
+                    <h2 class="main-heading">品牌故事</h2>
+                    <p class="main-desc">源自對台灣茶文化的深厚情感，Formosa Aroma 致力於將傳統茶道的精髓帶入當代都市生活。在洛杉磯的街頭，我們用每一杯茶述說關於這片土地的香氣故事。</p>
+                    <a href="about.html" class="main-cta-btn">LEARN OUR STORY</a>
+                </div>
             </div>
         </section>
 
-        <section id="join" class="page">
-            <h1>Join Us</h1>
-            <p>歡迎加入我們的團隊！</p>
-            <h2>職缺機會</h2>
-            <p>目前開放職位...</p>
-            <h2>加盟資訊</h2>
-            <p>加盟條件與流程...</p>
+        <section class="main-grid-section" data-aos="fade-up">
+            <div class="main-container main-grid main-reverse">
+                <div class="main-visual main-ratio-widescreen">
+                    <img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=1200&auto=format&fit=crop" class="main-img" alt="Tea Selection">
+                    <div class="main-overlay"></div>
+                </div>
+                <div class="main-info">
+                    <span class="main-index">02</span>
+                    <h2 class="main-heading">精準。手感</h2>
+                    <p class="main-desc">嚴選台灣高海拔原葉，我們堅持「精準手感」的製程。從焙火到萃取，每一步都遵循黃金參數，確保您手中的那一杯，永遠保持最初的純粹與甘甜。</p>
+                    <a href="collection.html" class="main-cta-btn">TEA COLLECTION</a>
+                </div>
+            </div>
         </section>
-    </div>
+
+        <section class="main-products-section" data-aos="fade-up">
+            <div class="main-container">
+                <div class="main-product-header">
+                    <div class="main-info">
+                        <span class="main-index">03</span>
+                        <h2 class="main-heading">主打飲品</h2>
+                        <p class="main-desc">每一杯 Formosa Aroma 都是對完美的極致追求。手工製作，層次分明，為您呈現台灣茶文化的現代詮釋。</p>
+                        <a href="menu.html" class="main-cta-btn">EXPLORE OUR MENU</a>
+                    </div>
+                </div>
+                
+                <div class="main-product-scroller">
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1576092729250-a9cdeed3d7c5?q=80&w=600" alt="Tea 1"></div>
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1594631252845-29fc458695d7?q=80&w=600" alt="Tea 2"></div>
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1563887232046-9a259ad33658?q=80&w=600" alt="Tea 3"></div>
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1544787210-2211d247156e?q=80&w=600" alt="Tea 4"></div>
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1512733596533-7b00ccf8ebaf?q=80&w=600" alt="Tea 5"></div>
+                    <div class="product-item"><img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=600" alt="Tea 6"></div>
+                </div>
+                <div class="scroller-bar-container"><div class="scroller-bar"></div></div>
+            </div>
+        </section>
+
+        <section class="main-grid-section" data-aos="fade-up">
+            <div class="main-container main-grid">
+                <div class="main-visual main-ratio-4-3">
+                    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=800" class="main-img" alt="Store Location">
+                    <div class="main-overlay"></div>
+                </div>
+                <div class="main-info">
+                    <span class="main-index">04</span>
+                    <h2 class="main-heading">我們的門市</h2>
+                    <p class="main-desc">無論您身在 Alhambra、Temple City 還是 San Jose，都能在 Formosa Aroma 找到一方靜謐。來到店內，親自感受我們為您打造的茶美學空間。</p>
+                    <a href="location.html" class="main-cta-btn">STORE LOCATION</a>
+                </div>
+            </div>
+        </section>        
+    </div>   
+
+    <footer class="main-footer-nav">
+        <div class="main-container footer-grid">
+            <div class="footer-col">
+                <h4>ABOUT US</h4>
+                <a href="about.html">Our Story</a>
+                <a href="philosophy.html">Philosophy</a>
+            </div>
+            <div class="footer-col">
+                <h4>PRODUCT</h4>
+                <a href="menu.html">Menu</a>
+                <a href="collection.html">Tea Collection</a>
+                <a href="catering.html">Catering Service</a>
+            </div>
+            <div class="footer-col">
+                <h4>LOCATIONS</h4>
+                <a href="#">Alhambra</a>
+                <a href="#">Temple City</a>
+                <a href="#">San Jose</a>
+            </div>
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <a href="join.html">Join Us</a>
+                <a href="#">Feedback</a>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
