@@ -304,24 +304,23 @@ nav {
 .main-product-scroller {
     display: flex;
     gap: 30px;
-    overflow-x: hidden;
     padding: 20px 0 60px 0;
     
-    /* 核心鎖定：防止選取文字與拖曳圖片 */
-    user-select: none;           /* 禁止選取文字 */
-    -webkit-user-drag: none;     /* 禁止系統預設拖曳圖片 */
-    -webkit-tap-highlight-color: transparent; /* 移除手機點擊高亮 */
+    /* 核心修正：允許網頁上下滑動，但讓 JS 接管左右滑動 */
+    touch-action: pan-y; 
+    overflow-x: auto; /* 給手機原生滑動一個退路 */
     
-    /* 物理效果優化 */
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
     scrollbar-width: none;
-    cursor: grab;
     
-    /* 強制開啟硬體加速 (GPU) */
+    /* 確保硬體加速，解決卡頓感 */
     transform: translateZ(0);
-    will-change: scroll-left;
-    touch-action: none;    /* 完全接管觸控 */
+}
+
+.main-product-scroller::-webkit-scrollbar {
+    display: none;
 }
 
 .main-product-scroller:active {

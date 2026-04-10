@@ -415,6 +415,49 @@ slider.addEventListener('mousedown', (e) => {
     animate();
 });
 
+let startY; // 用來記錄 Y 軸起點，判斷使用者的滑動意圖
+
+slider.addEventListener('touchstart', (e) => {
+    isDown = true;
+    // 記錄觸控點的 X 與 Y
+    startX = e.touches[0].pageX - slider.offsetLeft;
+    startY = e.touches[0].pageY; 
+    scrollLeft = slider.scrollLeft;
+    
+    cancelAnimationFrame(rafID); // 暫停動畫，準備跟隨手指
+}, { passive: true });
+
+slider.addEventListener('touchmove', (e) => {
+    if (!isDown) return;
+    
+    const x = e.touches[0].pageX - slider.offsetLeft;
+    const y = e.touches[0].pageY;
+    
+    const walkX = x - startX;
+    const walkY = y - startY;
+
+    // 【核心邏輯】：如果上下滑動的幅度大於左右，代表使用者想往下看網頁
+    if (Math.abs(walkY) > Math.abs(walkX)) {
+        isDown = false; // 放開 JS 控制，讓瀏覽器原生接手上下捲動
+        return;
+    }
+
+    // 如果是左右滑動，阻止瀏覽器預設行為（例如 iOS 的滑動上一頁），接管物理拖曳
+    if (e.cancelable) e.preventDefault();
+    
+    targetX = scrollLeft - (walkX * 1.5); // 1.5 是手機上的靈敏度
+    
+    // 防止拖拉超過邊界
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (targetX < 0) targetX = 0;
+    if (targetX > maxScroll) targetX = maxScroll;
+}, { passive: false });
+
+slider.addEventListener('touchend', () => {
+    isDown = false;
+    animate(); // 放開手指後，繼續執行彈性滑動動畫
+});
+
 slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
     e.preventDefault();
