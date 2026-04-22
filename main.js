@@ -370,132 +370,86 @@ const scrollBar = document.querySelector('.scroller-bar');
 let isDown = false;
 let startX;
 let scrollLeft;
-let velocity = 0;
-let rafID;
 
-// --- 核心物理參數 (調整這裡可以改變手感) ---
+// --- 核心物理參數 (電腦版專用) ---
 let targetX = 0;      // 目標捲動位置
 let currentX = 0;     // 當前顯示位置
-const lerpFactor = 0.05; // 越小越輕、越軟 (建議 0.03 ~ 0.06)
-const dragSpeed = 2.0;   // 拖拽靈敏度
-// ---------------------------------------
+const lerpFactor = 0.05; // 空氣感係數
+const dragSpeed = 1.8;   // 拖拽靈敏度
+let rafID;
 
+// 1. 更新進度條的函式 (全平台通用)
 function updateProgressBar() {
     const maxScroll = slider.scrollWidth - slider.clientWidth;
     if (maxScroll <= 0) return;
+    
+    // 使用實際的 scrollLeft 計算百分比
     const scrollPercent = slider.scrollLeft / maxScroll;
     
-    // 動態計算滑塊位移 (200 是容器寬，60 是滑塊寬)
-    const barTranslate = scrollPercent * (200 - 60);
+    // 計算滑塊位移：容器寬(200) - 滑塊寬(60) = 140px
+    const barTranslate = scrollPercent * 140; 
     scrollBar.style.transform = `translateX(${barTranslate}px)`;
 }
 
-function animate() {
-    // 核心物理公式：讓 current 慢慢追上 target
-    currentX += (targetX - currentX) * lerpFactor;
+// 偵測裝置：是否有觸控點 (粗略判斷手機)
+const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+if (!isTouchDevice) {
+    // --- 【電腦版：專屬物理引擎】 ---
+    function animate() {
+        currentX += (targetX - currentX) * lerpFactor;
+        slider.scrollLeft = currentX;
+        updateProgressBar();
+        rafID = requestAnimationFrame(animate);
+    }
+    animate();
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.style.cursor = 'grabbing';
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        cancelAnimationFrame(rafID);
+        animate();
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * dragSpeed;
+        targetX = scrollLeft - walk;
+        
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        targetX = Math.max(0, Math.min(targetX, maxScroll)); // 限制邊界
+    });
+
+    slider.addEventListener('mouseup', () => { isDown = false; slider.style.cursor = 'grab'; });
+    slider.addEventListener('mouseleave', () => { isDown = false; slider.style.cursor = 'grab'; });
+
+    slider.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+            e.preventDefault();
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            targetX += e.deltaY * 0.8;
+            targetX = Math.max(0, Math.min(targetX, maxScroll));
+        }
+    }, { passive: false });
+
+} else {
+    // --- 【手機版：回歸原生滑動，優化 Bar 同步】 ---
     
-    // 更新實際捲動位置
-    slider.scrollLeft = currentX;
-    
-    // 更新 Bar
-    updateProgressBar();
-    
-    rafID = requestAnimationFrame(animate);
+    // 讓手機原生捲動可以正常運作
+    slider.style.overflowX = 'auto';
+    slider.style.scrollBehavior = 'smooth'; 
+    slider.style.webkitOverflowScrolling = 'touch'; // 確保 iOS 慣性開啟
+
+    // 監聽原生 scroll 事件來同步金色 Bar
+    slider.addEventListener('scroll', () => {
+        // 使用 rAF 確保金條移動跟手，且不影響滑動效能
+        requestAnimationFrame(updateProgressBar);
+    });
 }
 
-// 啟動動畫
-animate();
-
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.style.cursor = 'grabbing';
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-    cancelAnimationFrame(rafID);
-    animate();
-});
-
-let startY; // 用來記錄 Y 軸起點，判斷使用者的滑動意圖
-
-slider.addEventListener('touchstart', (e) => {
-    isDown = true;
-    // 記錄觸控點的 X 與 Y
-    startX = e.touches[0].pageX - slider.offsetLeft;
-    startY = e.touches[0].pageY; 
-    scrollLeft = slider.scrollLeft;
-    
-    cancelAnimationFrame(rafID); // 暫停動畫，準備跟隨手指
-}, { passive: true });
-
-slider.addEventListener('touchmove', (e) => {
-    if (!isDown) return;
-    
-    const x = e.touches[0].pageX - slider.offsetLeft;
-    const y = e.touches[0].pageY;
-    
-    const walkX = x - startX;
-    const walkY = y - startY;
-
-    // 【核心邏輯】：如果上下滑動的幅度大於左右，代表使用者想往下看網頁
-    if (Math.abs(walkY) > Math.abs(walkX)) {
-        isDown = false; // 放開 JS 控制，讓瀏覽器原生接手上下捲動
-        return;
-    }
-
-    // 如果是左右滑動，阻止瀏覽器預設行為（例如 iOS 的滑動上一頁），接管物理拖曳
-    if (e.cancelable) e.preventDefault();
-    
-    targetX = scrollLeft - (walkX * 1.5); // 1.5 是手機上的靈敏度
-    
-    // 防止拖拉超過邊界
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    if (targetX < 0) targetX = 0;
-    if (targetX > maxScroll) targetX = maxScroll;
-}, { passive: false });
-
-slider.addEventListener('touchend', () => {
-    isDown = false;
-    animate(); // 放開手指後，繼續執行彈性滑動動畫
-});
-
-slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * dragSpeed;
-    
-    // 更新目標位置
-    targetX = scrollLeft - walk;
-    
-    // 限制邊界，防止拖過頭
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    if (targetX < 0) targetX = 0;
-    if (targetX > maxScroll) targetX = maxScroll;
-});
-
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.style.cursor = 'grab';
-});
-
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.style.cursor = 'grab';
-});
-
-// 讓滾輪也變得輕盈
-slider.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    
-    // 滾輪力度緩衝
-    targetX += e.deltaY * 0.8;
-    
-    if (targetX < 0) targetX = 0;
-    if (targetX > maxScroll) targetX = maxScroll;
-}, { passive: false });
-
-// 初始化
-targetX = slider.scrollLeft;
-currentX = slider.scrollLeft;
+// 初始化位置
+updateProgressBar();
