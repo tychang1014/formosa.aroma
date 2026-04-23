@@ -421,6 +421,11 @@ nav {
     transition: 0.3s;
 }
 
+.footer-col h4:hover {
+    color: var(--text-gold);
+    padding-left: 5px;
+}
+
 .footer-col a:hover {
     color: var(--text-gold);
     padding-left: 5px;

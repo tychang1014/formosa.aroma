@@ -116,8 +116,7 @@
                     <div class="product-item"><img src="https://github.com/tychang1014/formosa.aroma/blob/main/Index-Fruit.JPG?raw=true" alt="Tea 2"></div>
                     <div class="product-item"><img src="https://github.com/tychang1014/formosa.aroma/blob/main/Index-Taro.JPG?raw=true" alt="Tea 3"></div>
                     <div class="product-item"><img src="https://github.com/tychang1014/formosa.aroma/blob/main/Index-Lemon.JPG?raw=true" alt="Tea 4"></div>
-                    <div class="product-item"><img src="https://images.unsplash.com/photo-1512733596533-7b00ccf8ebaf?q=80&w=600" alt="Tea 5"></div>
-                    <div class="product-item"><img src="https://images.unsplash.com/photo-1597481499750-3e6b22637e12?q=80&w=600" alt="Tea 6"></div>
+                    <div class="product-item"><img src="https://github.com/tychang1014/formosa.aroma/blob/main/Index-Rose.png?raw=true" alt="Tea 5"></div>
                 </div>
                 <div class="scroller-bar-container"><div class="scroller-bar"></div></div>
             </div>
@@ -133,7 +132,7 @@
                     <span class="main-index">04</span>
                     <h2 class="main-heading">我們的門市</h2>
                     <p class="main-desc">無論您身在 Alhambra、Temple City 還是 San Jose，都能在 Formosa Aroma 找到一方靜謐。來到店內，親自感受我們為您打造的茶美學空間。</p>
-                    <a href="location.html" class="main-cta-btn">STORE LOCATION</a>
+                    <a href="#" class="main-cta-btn" data-key="store" onclick="loadPage('location.html')">STORE LOCATION</a>
                 </div>
             </div>
         </section>        
@@ -142,26 +141,25 @@
     <footer class="main-footer-nav">
         <div class="main-container footer-grid">
             <div class="footer-col">
-                <h4>ABOUT US</h4>
-                <a href="about.html">Our Story</a>
-                <a href="philosophy.html">Philosophy</a>
+                <h4 href="#" data-key="about" style="cursor: pointer;" onclick="loadPage('about.html')">ABOUT US</h4>
             </div>
             <div class="footer-col">
-                <h4>PRODUCT</h4>
-                <a href="menu.html">Menu</a>
-                <a href="collection.html">Tea Collection</a>
-                <a href="catering.html">Catering Service</a>
+                <h4 data-key="product">PRODUCT</h4>
+                <a href="#" data-key="whatsnew" onclick="loadPage('feature.html')">What's New</a>
+                <a href="#" data-key="tealeave" onclick="loadPage('intro.html')">Tea Collection</a>
+                <a href="#" data-key="menu" onclick="loadPage('menu.html')">Menu</a>
+                <a href="#" data-key="catering" onclick="loadPage('catering.html')">Catering Service</a>
             </div>
             <div class="footer-col">
-                <h4>LOCATIONS</h4>
-                <a href="#">Alhambra</a>
-                <a href="#">Temple City</a>
-                <a href="#">San Jose</a>
+                <h4 data-key="store">STORE LOCATIONS</h4>
+                <a href="#" onclick="loadPage('location.html')">Alhambra</a>
+                <a href="#" onclick="loadPage('location.html')">Temple City</a>
+                <a href="#" onclick="loadPage('location.html')">San Jose</a>
             </div>
             <div class="footer-col">
-                <h4>CONTACT</h4>
-                <a href="join.html">Join Us</a>
-                <a href="#">Feedback</a>
+                <h4 data-key="join">JOIN US</h4>
+                <a href="#" data-key="job" onclick="loadPage('job.html')">Job Opportunity</a>
+                <a href="#" data-key="franchise" onclick="loadPage('franchise.html')">Franchise</a>
             </div>
         </div>
     </footer>
