@@ -90,7 +90,16 @@ const translations = {
         alhambra_menu: "Alhambra Menu",
         temple_city_menu: "Temple City Menu",
         san_jose_menu: "San Jose Menu",
-        craft_own: "Craft Your Own Drink"
+        craft_own: "Craft Your Own Drink",
+        catering_office_title: "Office Catering",
+        catering_office_content: "Boost your team building with refreshing drinks. Spark conversations, connections, and shared moments.",
+        catering_wedding_title: "Weddings",
+        catering_wedding_content: "An elegant tea bar experience crafted to elevate every moment of your special day.",
+        catering_school_title: "School Events",
+        catering_school_content: "Thoughtfully crafted beverages to refresh, recharge, and elevate the campus experience for students and staffs.",
+        catering_birthday_title: "Birthdays",
+        catering_birthday_content: "A fun and delightful experience for your birthday, filled with laughter, handcrafted drinks, and unforgettable memories.",
+        catering_cta_title: "Let’s Plan Your Event"
     },
     zh: {
         main: "首頁",
@@ -122,7 +131,16 @@ const translations = {
         alhambra_menu: "Alhambra 門市菜單",
         temple_city_menu: "Temple City 門市菜單",
         san_jose_menu: "San Jose 門市菜單",
-        craft_own: "客製化飲品"
+        craft_own: "客製化飲品",
+        catering_office_title: "公司聚會",
+        catering_office_content: "以手工飲品提升團隊凝聚力，拉近彼此距離，打造更緊密的團隊關係。",
+        catering_wedding_title: "婚禮宴會",
+        catering_wedding_content: "為您的特別日子提供優雅的茶飲吧體驗，讓每一刻都更加動人與難忘。",
+        catering_school_title: "校園活動",
+        catering_school_content: "精心打造的飲品，為學生與教職員帶來清新及充滿活力的校園體驗。",
+        catering_birthday_title: "生日派對",
+        catering_birthday_content: "為您的生日帶來歡樂與美味的體驗，讓手工飲品和難忘回憶充滿整個派對。",
+        catering_cta_title: "聯繫島嶼"
       }
 };
 

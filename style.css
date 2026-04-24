@@ -1469,12 +1469,52 @@ header p {
 
 /* CTA */
 .catering-cta-section {
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
+    background: var(--primary-blue);
 }
 
-.catering-cta-section h2 {
+.catering-cta-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    border: 1px solid var(--secondary-yellow);
+    border-radius: 2px;
+    
+    /* subtle depth */
+    background: var(--card-bg);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.catering-cta-content h2 {
     color: var(--text-gold);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.catering-cta-content p {
+    color: var(--hover-glow);
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.catering-cta-content a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* email 強化但不浮誇 */
+.cta-email {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: var(--hover-glow);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 238, 187, 0.4);
+    padding-bottom: 2px;
+    transition: all 0.25s ease;
 }
 
 /*------- Location Section ------- */
