@@ -9,7 +9,6 @@ function loadPage(page, targetId = null) {
       if (drawer && drawer.classList.contains('active')) {
           drawer.classList.remove('active'); // 讓導覽列彈回去
       }
-      initObserver();
 
       // 2. 【關鍵修正】取得目前儲存的語系（如果沒存過，預設為 'en'）
       const currentLang = localStorage.getItem('preferredLanguage') || 'en';
@@ -53,10 +52,15 @@ function initObserver() {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.tea-item').forEach(item => {
-    observer.observe(item);
+  document.querySelectorAll('.tea-item, .main-grid-section').forEach(element => {
+    observer.observe(element);
   });
+
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+initObserver();
+});
 
 // 1. 翻譯資料字典
 const translations = {
@@ -73,6 +77,16 @@ const translations = {
         job: "Job Opportunity",
         franchise: "Franchise",
         language: "Language",
+        brand_story: "Brand Story",
+        brand_story_content: "Formosa Aroma is a local Los Angeles brand founded by a group of young entrepreneurs with a passion for Taiwanese culture. Staying true to the natural essence of tea, we carefully select premium loose-leaf teas and natural ingredients to bring out their pure, authentic aroma. In our cozy space, where contemporary aesthetics meet vintage charm, we share the warmth and memories of Taiwan through thoughtful craftsmanship, making every sip a rich and comforting experience.",
+        signature_drinks: "Signature Drinks",
+        signature_drinks_content: "Every signature drinks begins with a genuine appreciation for tea. From selecting the leaves to brewing and preparing each drink, we pay attention to the details to bring out the natural aroma and character of the tea. A modern interpretation of Taiwanese tea culture, proudly presented by Formosa Aroma.",
+        learn_our_story: "LEARN OUR STORY",
+        tea_collection: "TEA COLLECTION",
+        tea_selection_content: "A good cup of tea starts with good leaves. We carefully select over 12 Taiwanese teas, from Alishan Jin Xuan and Ruby Red to Wenshan Pouchong, each with its own aroma and character. We take the time to find the right way to brew each tea, allowing its natural flavors to come through with a smooth aroma and lingering finish. Paired with a variety of quality milk options, each tea offers a different way to enjoy the flavors of Taiwan.",
+        explore_our_menu: "EXPLORE OUR MENU",
+        store_location: "STORE LOCATION",
+        store_location_content: "From Alhambra and Temple City to San Jose, Formosa Aroma brings our love for Taiwanese tea to different communities. Each location has its own atmosphere and exclusiveness, but our attention to tea quality remains the same. Stop by, take a seat, and find a tea that feels right for you.",
         about_title: "About Formosa Aroma",
         about_desc: "is dedicated to preserving and delivering authentic Taiwanese tea using carefully selected premium tea leaves. We honor traditional craftsmanship while embracing modern innovation, ensuring every cup reflects the rich heritage, purity, and exceptional quality of Taiwan’s tea culture.",
         about_desc2: "With over 20 cusomizable toppings, we offer a unique and personalized tea experience. Our commitment to quality and innovation has made us a beloved brand in the community, and we invite you to craft your own flavor journey, where tradition meets creativity in every sip.",
@@ -117,6 +131,16 @@ const translations = {
         job: "工作機會",
         franchise: "加盟",
         language: "語言",
+        brand_story: "品牌故事",
+        brand_story_content: "源於洛杉磯的在地品牌 Formosa Aroma「島嶼茶鄉」，由一群熱愛台灣文化的青年創業家共同打造。我們秉持還原茶飲本味的初衷，嚴選優質原葉茶與天然食材，讓每一杯茶都保留茶葉自然純粹的香氣。在揉合當代美學與復古風情的舒適空間裡，我們以職人精神傳遞台灣的茶文化與記憶，讓每一口茶湯都帶來醇厚、溫潤的享受。",
+        signature_drinks: "招牌飲品",
+        signature_drinks_content: "每一杯招牌飲品都從一份對茶的講究開始。從茶葉的選擇、沖泡到每一杯的製作，我們在意每個細節，把茶本身的香氣與風味好好呈現。為您呈現台灣茶文化的現代詮釋。",
+        learn_our_story: "島嶼的故事",
+        tea_collection: "精選茶葉",
+        tea_selection_content: "一杯好喝的茶，從茶葉開始。我們精選 12 款以上台灣茶，從阿里山金萱、紅玉紅茶到文山包種，每一款都有自己的香氣與個性。我們也花時間研究每款茶適合的沖泡方式，讓茶葉原本的風味自然展開，留下舒服的茶香與回甘。再搭配不同的優質奶類，讓熟悉的茶，也能有更多值得探索的風味。",
+        explore_our_menu: "探索菜單",
+        store_location: "門市位置",
+        store_location_content: "Formosa Aroma 將我們對台灣茶的喜愛帶到不同的城市，從 Alhambra、Temple City 到 San Jose。每間店都有自己的氛圍及專屬菜單，但不變的是我們對茶葉品質的講究，以及希望讓每位客人都能好好喝一杯茶的初衷。歡迎來店裡坐坐，找一杯適合自己的茶。",
         about_title: "關於島嶼茶鄉",
         about_desc: "島嶼茶鄉致力於傳承與呈現正宗台灣茶香。堅持以嚴選高品質茶葉，融合傳統工藝與創新技術，確保每一杯茶都展現台灣茶深厚的底蘊、純淨風味與卓越品質。",
         about_desc2: "我們提供超過 20 種可客製化配料選擇，為顧客打造獨一無二的個人化品茶體驗。憑藉對品質與創新的堅持，Formosa Aroma 在市場中持續建立良好的口碑。我們誠摯的邀請您來打造屬於您的專屬風味，讓每一口都能喝到台灣的細緻與創新。",
@@ -477,3 +501,4 @@ if (!isTouchDevice) {
 
 // 初始化位置
 updateProgressBar();
+

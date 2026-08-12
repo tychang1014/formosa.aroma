@@ -222,7 +222,15 @@ nav {
 
 /* --- 3. 交錯區塊系統 (Grid Sections) --- */
 .main-grid-section {
-    padding: 80px 0;
+    padding: 50px 0;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.main-grid-section.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .main-grid {
@@ -253,6 +261,7 @@ nav {
 
 /* 比例控制 */
 .main-ratio-4-3 { aspect-ratio: 4 / 3; }
+.main-ratio-4-5 { aspect-ratio: 4 / 5; }
 .main-ratio-widescreen { aspect-ratio: 21 / 9; }
 
 .main-img {
@@ -267,6 +276,7 @@ nav {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(135deg, rgba(17,22,33,0.7) 0%, rgba(149,100,36,0.1) 100%);
+    opacity: 0.5;
     pointer-events: none;
 }
 
@@ -290,10 +300,37 @@ nav {
 }
 
 .main-desc {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 35px;
+    color: var(--body-text);
+}
+.main-desc-bogo {
+    font-size: 1.5rem;
     font-weight: 300;
     margin-bottom: 35px;
     color: var(--body-text);
+}
+.bogo-tea-zh {
+    padding-top: 15px;
+    display: block;
+    font-size: 1.7rem;
+    color: #f4eee4;
+}
+
+.bogo-tea-en {
+    display: block;
+    font-size: 1.2rem;
+    color: #f4eee4;
+    letter-spacing: 0.03em;
+}
+
+.bogo-date-text {
+    font-size: 1.2rem;
+    color: #f4eee4;
+    letter-spacing: 0.08em;
 }
 
 /* --- 5. 產品滑動區塊 (Product Scroller) --- */
@@ -1330,6 +1367,7 @@ header p {
 
 .catering-hero-overlay {
     text-align: center;
+    width: 40%;
     background: rgba(0,0,0,0.8);
     padding: 40px;
     border-radius: 20px;
