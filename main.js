@@ -409,96 +409,225 @@ function resetAutoPlay() {
 }
 
 function scrollToSection() {
-  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  const section = document.getElementById('catering-info'); // 替換成你想要滾動到的區塊 ID
+  
+  // If the element exists, scroll to it smoothly
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 
 const slider = document.querySelector('.main-product-scroller');
 const scrollBar = document.querySelector('.scroller-bar');
 
-let isDown = false;
-let startX;
-let scrollLeft;
+if (slider && scrollBar) {
 
-// --- 核心物理參數 (電腦版專用) ---
-let targetX = 0;      // 目標捲動位置
-let currentX = 0;     // 當前顯示位置
-const lerpFactor = 0.05; // 空氣感係數
-const dragSpeed = 1.8;   // 拖拽靈敏度
-let rafID;
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-// 1. 更新進度條的函式 (全平台通用)
-function updateProgressBar() {
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    if (maxScroll <= 0) return;
-    
-    // 使用實際的 scrollLeft 計算百分比
-    const scrollPercent = slider.scrollLeft / maxScroll;
-    
-    // 計算滑塊位移：容器寬(200) - 滑塊寬(60) = 140px
-    const barTranslate = scrollPercent * 140; 
-    scrollBar.style.transform = `translateX(${barTranslate}px)`;
-}
+    // --- 核心物理參數 ---
+    let targetX = 0;
+    let currentX = 0;
+    const lerpFactor = 0.05;
+    const dragSpeed = 1.8;
+    let rafID;
 
-// 偵測裝置：是否有觸控點 (粗略判斷手機)
-const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-
-if (!isTouchDevice) {
-    // --- 【電腦版：專屬物理引擎】 ---
-    function animate() {
-        currentX += (targetX - currentX) * lerpFactor;
-        slider.scrollLeft = currentX;
-        updateProgressBar();
-        rafID = requestAnimationFrame(animate);
-    }
-    animate();
-
-    slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        slider.style.cursor = 'grabbing';
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        cancelAnimationFrame(rafID);
-        animate();
-    });
-
-    slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * dragSpeed;
-        targetX = scrollLeft - walk;
-        
+    function updateProgressBar() {
         const maxScroll = slider.scrollWidth - slider.clientWidth;
-        targetX = Math.max(0, Math.min(targetX, maxScroll)); // 限制邊界
-    });
+        if (maxScroll <= 0) return;
+        const scrollPercent = slider.scrollLeft / maxScroll;
+        const barTranslate = scrollPercent * 140;
+        scrollBar.style.transform = `translateX(${barTranslate}px)`;
+    }
 
-    slider.addEventListener('mouseup', () => { isDown = false; slider.style.cursor = 'grab'; });
-    slider.addEventListener('mouseleave', () => { isDown = false; slider.style.cursor = 'grab'; });
+    const isTouchDevice =
+        window.matchMedia("(pointer: coarse)").matches;
 
-    slider.addEventListener('wheel', (e) => {
-        if (e.deltaY !== 0) {
-            e.preventDefault();
-            const maxScroll = slider.scrollWidth - slider.clientWidth;
-            targetX += e.deltaY * 0.8;
-            targetX = Math.max(0, Math.min(targetX, maxScroll));
+    if (!isTouchDevice) {
+        function animate() {
+            currentX += (targetX - currentX) * lerpFactor;
+            slider.scrollLeft = currentX;
+            updateProgressBar();
+            rafID = requestAnimationFrame(animate);
         }
-    }, { passive: false });
 
-} else {
-    // --- 【手機版：回歸原生滑動，優化 Bar 同步】 ---
-    
-    // 讓手機原生捲動可以正常運作
-    slider.style.overflowX = 'auto';
-    slider.style.scrollBehavior = 'smooth'; 
-    slider.style.webkitOverflowScrolling = 'touch'; // 確保 iOS 慣性開啟
+        animate();
 
-    // 監聽原生 scroll 事件來同步金色 Bar
-    slider.addEventListener('scroll', () => {
-        // 使用 rAF 確保金條移動跟手，且不影響滑動效能
-        requestAnimationFrame(updateProgressBar);
-    });
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+            cancelAnimationFrame(rafID);
+            animate();
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * dragSpeed;
+            targetX = scrollLeft - walk;
+            const maxScroll =
+                slider.scrollWidth - slider.clientWidth;
+            targetX = Math.max(
+                0,
+                Math.min(targetX, maxScroll)
+            );
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                const maxScroll =
+                    slider.scrollWidth - slider.clientWidth;
+                targetX += e.deltaY * 0.8;
+                targetX = Math.max(
+                    0,
+                    Math.min(targetX, maxScroll)
+                );
+            }
+        }, { passive: false });
+
+    } else {
+
+        slider.style.overflowX = 'auto';
+        slider.style.scrollBehavior = 'smooth';
+        slider.style.webkitOverflowScrolling = 'touch';
+        slider.addEventListener('scroll', () => {
+            requestAnimationFrame(updateProgressBar);
+        });
+    }
+    updateProgressBar();
 }
 
-// 初始化位置
-updateProgressBar();
+document.addEventListener("click", function (event) {
+    const button = event.target.closest(".gallery-arrow");
+    if (!button) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const gallery = button.closest(".store-gallery");
+    if (!gallery) return;
+    // 動畫中不要重複點
+    if (gallery.classList.contains("is-sliding")) {
+        return;
+    }
 
+    // ==========================================
+    // 第一次使用時，自動建立 gallery-track
+    // ==========================================
+    let track = gallery.querySelector(".gallery-track");
+    if (!track) {
+        const originalImages =
+            Array.from(gallery.querySelectorAll(".gallery-image"));
+        if (originalImages.length < 2) return;
+        track = document.createElement("div");
+        track.className = "gallery-track";
+
+        // 把原本的圖片放進 track
+        originalImages.forEach(function (image) {
+            track.appendChild(image);
+        });
+
+        // 放回 gallery
+        gallery.insertBefore(
+            track,
+            gallery.querySelector(".gallery-arrow")
+        );
+
+        // Clone 第一張和最後一張
+        const firstClone =
+            originalImages[0].cloneNode(true);
+        const lastClone =
+            originalImages[originalImages.length - 1].cloneNode(true);
+        track.insertBefore(
+            lastClone,
+            track.firstChild
+        );
+        track.appendChild(firstClone);
+
+        // 初始位置：真正第一張
+        track.style.transform =
+            "translateX(-100%)";
+        track.offsetWidth;
+        gallery.dataset.currentIndex = "1";
+        gallery.dataset.initialized = "true";
+    }
+
+    // ==========================================
+    // 取得所有照片
+    // ==========================================
+    const images =
+        track.querySelectorAll(".gallery-image");
+    const total = images.length;
+
+    let currentIndex =
+        parseInt(
+            gallery.dataset.currentIndex || "1",
+            10
+        );
+    let nextIndex;
+
+    // ==========================================
+    // NEXT
+    // ==========================================
+    if (button.classList.contains("gallery-next")) {
+        nextIndex = currentIndex + 1;
+    }
+
+    // ==========================================
+    // PREVIOUS
+    // ==========================================
+    else {
+        nextIndex = currentIndex - 1;
+    }
+
+    // ==========================================
+    // 開始滑動
+    // ==========================================
+    gallery.classList.add("is-sliding");
+    track.style.transition =
+        "transform 0.55s cubic-bezier(0.65, 0, 0.35, 1)";
+    track.style.transform =
+        `translateX(-${nextIndex * 100}%)`;
+    gallery.dataset.currentIndex =
+        nextIndex;
+
+
+    // ==========================================
+    // 動畫結束
+    // ==========================================
+
+    setTimeout(function () {
+
+        // 從最後一張 clone
+        // 無縫回到真正第一張
+        if (nextIndex === total - 1) {
+            track.style.transition = "none";
+            track.style.transform =
+                "translateX(-100%)";
+            gallery.dataset.currentIndex = "1";
+        }
+
+
+        // 從第一張 clone
+        // 無縫回到真正最後一張
+        if (nextIndex === 0) {
+            track.style.transition = "none";
+            track.style.transform =
+                `translateX(-${total - 2}00%)`;
+            gallery.dataset.currentIndex =
+                total - 2;
+        }
+        gallery.classList.remove("is-sliding");
+    }, 570);
+});

@@ -577,6 +577,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0.5; /* 半透明覆蓋層，增加 Chic 感 */
     background: linear-gradient(135deg, rgba(17, 22, 33, 0.85) 0%, rgba(149, 100, 36, 0.15) 100%);
     pointer-events: none;
 }
@@ -1358,17 +1359,24 @@ header p {
 
 /* HERO */
 .catering-hero {
-    height: 70vh;
-    background: url('https://images.unsplash.com/photo-1544148103-0773bf10d330') center/cover;
+    height: 90vh;
+    background: url('https://github.com/tychang1014/formosa.aroma/blob/main/Catering-Banner.png?raw=true') center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .catering-hero-overlay {
+    grid-area: 1 / 1; /* 讓 overlay 也佔據同一個格子，這樣就會疊在圖片上 */
+    place-self: center; /* 直接完美置中 */
+    
+    /* 利用 margin-bottom 把置中的框框往上推一點點 (達到微微偏上的效果) */
+    margin-bottom: 10%;
+    
     text-align: center;
     width: 40%;
-    background: rgba(0,0,0,0.8);
+    /*background: rgba(0,0,0,0.8);*/
+    background: rgba(207, 170, 104, 0.3); /* 微微金色光暈感 */
     padding: 40px;
     border-radius: 20px;
 }
@@ -1376,6 +1384,7 @@ header p {
 .catering-title {
     font-size: 2.5rem;
     color: var(--text-gold);
+    padding-bottom: 10px;
 }
 
 .catering-subtitle {
@@ -1569,15 +1578,11 @@ header p {
     padding-left: 10%;
     padding-right: 10%;
     background-color: var(--primary-blue);
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
 }
 
-.location-text h2 {
-    font-size: 2.5rem;
-    color: var(--hover-glow);
-    display: inline-block;
+/* Store title + address */
+.location-text {
+    margin-bottom: 20px;
 }
 
 .location-text p1 {
@@ -1585,20 +1590,128 @@ header p {
     line-height: 2.5;
     font-weight: bold;
     text-align: left;
+    display: block;
 }
 
 .location-text p2 {
     font-size: 1.3rem;
     font-style: italic;
-    text-align: left;            
+    text-align: left;
 }
-.location-box {
+
+/* =========================
+   MAP + PHOTO
+   ========================= */
+
+.location-media {
     margin-top: 2%;
-    flex: 1;
+    width: 100%;
     height: 450px;
     border: 2px solid var(--secondary-yellow);
     padding: 10px;
     box-shadow: 0 0 20px rgba(149, 100, 36, 0.2);
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Left side - Map */
+.location-map {
+    width: 80%;
+    height: 425px;
+    padding-right: 5px;
+}
+
+.location-map iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    flex: 0 0 50%;
+}
+
+.store-gallery {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    flex: 0 0 40%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.gallery-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition:
+        transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.gallery-image {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================
+   ARROWS
+   ========================= */
+
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 80px;
+    border: none;
+    background: rgba(0, 0, 0, 0.12);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 35px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 9999;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.gallery-prev {
+    left: 0;
+}
+
+.gallery-next {
+    right: 0;
+}
+
+.gallery-arrow:hover {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+}
+
+/* 動畫期間稍微降低箭頭透明度 */
+.store-gallery.is-sliding .gallery-arrow {
+    opacity: 0.5;
+}
+
+
+/* =========================
+   PHOTO COUNTER
+   ========================= */
+
+.gallery-counter {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 12px;
+    background: rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    border-radius: 20px;
+    z-index: 5;
 }
 
 /*---------------Career Page---------------*/
@@ -2118,6 +2231,45 @@ header p {
     .catering-grid {
         grid-template-columns: 1fr;
     }
+
+    .catering-hero-overlay {
+    text-align: center;
+    width: 80%;
+    background: rgba(207, 170, 104, 0.3); /* 微微金色光暈感 */
+    padding: 40px;
+    border-radius: 20px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 將元素往回拉一半的高與寬，達到完美置中 */
+    }
+
+    .address-section {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .location-media {
+        flex-direction: column;
+        height: auto;        /* 新增：讓高度依內容撐開，不再鎖死 450px */
+        overflow: visible;   /* 新增：避免任何殘留裁切 */
+    }
+
+    .location-map,
+    .store-gallery {
+        width: 100%;
+        height: auto;         /* 新增：先清掉繼承的固定 height */
+        aspect-ratio: 4 / 3;  /* 這樣 aspect-ratio 才會真正生效 */
+        padding-bottom: 5px;  /* 新增：給點下方空間，避免貼邊 */
+    }
+    .location-map {
+        order: 1;
+    }
+    .store-gallery {
+        order: 2;
+    }
+
 }
 
 /* 這個高度要等於你 nav 的 height */
