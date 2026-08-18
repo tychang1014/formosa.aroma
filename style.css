@@ -1580,6 +1580,29 @@ header p {
     background-color: var(--primary-blue);
 }
 
+.location-title {
+    color: var(--text-gold);
+    font-size: 2rem;
+    text-shadow: 0 0 15px rgba(207, 170, 104, 0.3);
+    letter-spacing: 2px;
+}
+
+.location-sub {
+    color: var(--body-text);
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+.location-text {
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    letter-spacing: 5px;
+    line-height: 1.5;
+    margin-bottom: 10px;    
+}
+
 /* Store title + address */
 .location-text {
     margin-bottom: 20px;
